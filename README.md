@@ -1,3 +1,3 @@
 # p7_groupomania
 
-Project 7 Openclassroom
+Project 7 Openclassrooms
