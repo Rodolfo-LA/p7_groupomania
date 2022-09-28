@@ -1,6 +1,6 @@
 
 import logo from '../assets/icon-left-font-monochrome-black.svg'
-import '../styles/Banner.css'
+import '../styles/Banner.scss'
 import React from 'react'
 import {Link} from 'react-router-dom'
 
