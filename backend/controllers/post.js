@@ -92,11 +92,9 @@ exports.getAllPosts = (req, res, next) => {
 // Middleware pour la gestion des likes
 
 exports.likePost = (req, res, next) => {
-   console.log(req.params.id)
    Post.findOne({ _id: req.params.id })
       .then(post => {
          // traitement like
-         //console.log(req.body.like)
          switch (req.body.like) {
             case 0:
                let pos = post.usersLiked.indexOf(req.auth.userId);
