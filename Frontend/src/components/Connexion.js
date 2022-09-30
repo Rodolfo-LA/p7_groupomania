@@ -17,7 +17,7 @@ export default function Connexion() {
     axios.post("http://localhost:4000/api/auth/login", requete)
       .then(function(value) {
         document.getElementById("reponse").textContent = value.data.userId;
-        navigate(`/env/${value.data.token}`);
+        navigate(`/env/${value.data.token}/${value.data.userId}`);
       })
       .catch((err) => {
         console.log(err.response.data);

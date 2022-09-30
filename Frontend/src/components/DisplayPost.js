@@ -25,9 +25,16 @@ export default function DisplayPost(props) {
 
   return (
     <div className='dispo'>
-      {tabPosts.map(pt =>(<Affiche key={pt._id} 
+      {tabPosts.map(pt =>(<Affiche key={pt._id}
+                                   _id={pt._id}
                                    titre={pt.name}
                                    source={pt.imageUrl}
+                                   likes={pt.likes}
+                                   dislikes={pt.dislikes}
+                                   usersLiked={pt.usersLiked}
+                                   usersDisliked={pt.usersDisliked}
+                                   userId={props.userIdPass}
+                                   token={props.tokenPass}                              
       />))}
   </div>
   )

@@ -5,7 +5,7 @@ import DisplayPost from './DisplayPost'
 
 export default function Envoi() {
 
-  let { token } = useParams();
+  let { token, userId } = useParams();
   let [ buttonCreate, setButtonCreate ] = useState(false);
   let [onPost, setOnpost] = useState(false);
   let [onGetpost, setOngetpost] = useState(true);
@@ -36,7 +36,7 @@ export default function Envoi() {
         <button onClick={retour}>Se déconnecter</button>
       </div>
       {buttonCreate && <CreatePost tokenPass={token} majOnpost={setOnpost}/>} 
-      <DisplayPost tokenPass={token} getPost={onGetpost} fnGetpost={setOngetpost}/>
+      <DisplayPost tokenPass={token} userIdPass={userId} getPost={onGetpost} fnGetpost={setOngetpost}/>
     </div>
   )
 }

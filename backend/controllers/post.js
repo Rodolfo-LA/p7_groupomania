@@ -92,9 +92,11 @@ exports.getAllPosts = (req, res, next) => {
 // Middleware pour la gestion des likes
 
 exports.likePost = (req, res, next) => {
-   post.findOne({ _id: req.params.id })
+   console.log(req.params.id)
+   Post.findOne({ _id: req.params.id })
       .then(post => {
          // traitement like
+         //console.log(req.body.like)
          switch (req.body.like) {
             case 0:
                let pos = post.usersLiked.indexOf(req.auth.userId);
@@ -122,7 +124,7 @@ exports.likePost = (req, res, next) => {
          delete postObject._id;
          delete postObject._userId;
          delete postObject.__v;
-         post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
+         Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
             .then(() => res.status(200).json({ message: 'Updated like' }))
             .catch(error => res.status(401).json({ error }));
       })
