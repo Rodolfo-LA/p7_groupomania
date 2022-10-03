@@ -12,15 +12,11 @@ export default function Affiche(props) {
   let [ onLike, setOnlike ] = useState(false);
   let [ onDislike, setOndislike ] = useState(false);
 
+  let [ onButtonLike, setOnbuttonlike ] = useState(true);
+  let [ onButtonDislike, setOnbuttondislike ] = useState(true);
+
   let [ nbLike, setNblike ] = useState(props.likes);
   let [ nbDislike, setNbdislike ] = useState(props.dislikes);
-
-
-
-  function refresh() {
-  }
-
-  useEffect(() => {refresh()},[onLike]);
 
   function sendInfos(e) {
     e.preventDefault()
@@ -30,9 +26,11 @@ export default function Affiche(props) {
   if (onFirst) {
     if (props.usersLiked.includes(props.userId)) {
       setOnlike(true);
+      setOnbuttondislike(false);
     }
     if (props.usersDisliked.includes(props.userId)) {
       setOndislike(true);
+      setOnbuttonlike(false);
     }
     setOnfirst(false);
   }
@@ -53,10 +51,12 @@ export default function Affiche(props) {
     let code = 0;
     if (!onLike) {
       code = 1;  
-      setNblike(nbLike=nbLike+1); 
+      setNblike(nbLike=nbLike+1);
+      setOnbuttondislike(false);
     }
     else {
       setNblike(nbLike=nbLike-1); 
+      setOnbuttondislike(true);
     }
     setOnlike(onLike=!onLike);
     majLike(code);
@@ -67,9 +67,11 @@ export default function Affiche(props) {
     if (!onDislike){
       code = -1;
       setNbdislike(nbDislike=nbDislike+1);
+      setOnbuttonlike(false);
     }
     else {
       setNbdislike(nbDislike=nbDislike-1);
+      setOnbuttonlike(true);
     } 
     setOndislike(onDislike=!onDislike);
     majLike(code);
@@ -88,7 +90,6 @@ export default function Affiche(props) {
     axios.post(`http://localhost:4000/api/posts/${props._id}/like`, requete, config)
       .then(function(value) {
         console.log(value.data.message);
-        //window.location.reload();
       })
       .catch((err) => {
         console.log(err.response.data.message);
@@ -107,8 +108,8 @@ export default function Affiche(props) {
       </div>
       <div className='cadre-bouton'>
         <button onClick={() => setOncomment(!onComment)}>Commenter</button>
-        <button onClick={() => like()}>Like</button>
-        <button onClick={() => dislike()}>Dislike</button>
+        {onButtonLike ? <button onClick={() => like()}>Like</button>:<button className='button--off'>Like</button>}
+        {onButtonDislike ? <button onClick={() => dislike()}>Dislike</button>:<button className='button--off'>Dislike</button>}
       </div>
       <div className='cadre-comment'>
         {onComment && 
@@ -116,8 +117,8 @@ export default function Affiche(props) {
           <textarea name="comment" rows="4" defaultValue={''} />
           <button type="submit">Envoyer</button>
         </form>}
-        <p>{nbLike}</p>
-        <p>{nbDislike}</p>
+        <p>{onButtonLike?"VRAI":"FAUX"}</p>
+        <p>{onButtonDislike?"VRAI":"FAUX"}</p>
         <p>Le chat est là</p>
         <p>Le chien est là</p>
       </div>

@@ -24,6 +24,22 @@ button {
   font-size: 100%;
   border-style: hidden;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.498);
+  &:hover {
+    background-color: rgb(147, 0, 0);
+  }
+  &:active {
+    scale: 95%;
+  }
+}
+
+.button--off {
+   background-color: grey;
+   &:hover {
+    background-color: grey;
+   }
+   &:active {
+    scale: 100%;
+  }
 }
 
 .options {
