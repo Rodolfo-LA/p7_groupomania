@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import axios from 'axios'
 
 import logoLike from '../assets/logo_like.svg'
@@ -18,6 +18,23 @@ export default function Affiche(props) {
 
   let [ nbLike, setNblike ] = useState(props.likes);            // nombre de like du post
   let [ nbDislike, setNbdislike ] = useState(props.dislikes);   // nombre de dislike du post
+
+  // fonction pour effacer un Post
+
+  function deletePost() {
+
+    const config = {     
+      headers: { 'Authorization': `Bearer ${props.token}`}      // envoi du jeton de l'utilisateur actuel
+    }
+
+    axios.delete(`http://localhost:4000/api/posts/${props._id}`, config)    // envoi au serveur Backend
+      .then(function(value) {
+        props.fnclosePost(true);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+    });
+  }
 
   // fonction pour la mise à jour des commentaires dans la base de données
 
@@ -135,6 +152,7 @@ export default function Affiche(props) {
         <img src={props.source} alt='ma photo' />
         <figcaption>{props.titre}</figcaption>
       </figure>
+       {(props.delPost && (props.userId==props.userPost)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}
       <div className='like'>
         {tabLike}
         {tabdisLike}

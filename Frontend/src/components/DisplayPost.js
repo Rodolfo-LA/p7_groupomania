@@ -1,10 +1,13 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import axios from 'axios'
 import Affiche from './Affiche'
 
 export default function DisplayPost(props) {
 
-  const [tabPosts, updateTabPosts] = useState([]);
+  let [tabPosts, updateTabPosts] = useState([]);
+  let [closePost, updateClosepost] = useState(false);
+
+  useEffect(() => {props.fnGetpost(true);},[closePost]);
 
   if (props.getPost) {
     const config = {     
@@ -21,7 +24,7 @@ export default function DisplayPost(props) {
     });
   }
 
-  //console.log(tabPosts);
+  console.log(tabPosts);
 
   return (
     <div className='dispo'>
@@ -33,9 +36,12 @@ export default function DisplayPost(props) {
                                    dislikes={pt.dislikes}
                                    usersLiked={pt.usersLiked}
                                    usersDisliked={pt.usersDisliked}
+                                   comments={pt.comments}
+                                   userPost={pt.userId}
                                    userId={props.userIdPass}
                                    token={props.tokenPass}
-                                   comments={pt.comments}                           
+                                   delPost={props.delPost}
+                                   fnclosePost={updateClosepost}                        
       />))}
   </div>
   )
