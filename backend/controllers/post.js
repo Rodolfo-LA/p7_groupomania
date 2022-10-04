@@ -13,7 +13,7 @@ exports.createPost = (req, res, next) => {
       ...req.body,
       userId: req.auth.userId,
       name: req.body.name,
-      comments: "",
+      comments: [],
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
       likes: 0,
       dislikes: 0,
@@ -26,25 +26,18 @@ exports.createPost = (req, res, next) => {
       .catch(error => res.status(400).json({ error }));
 };
 
-// Middleware pour modifier une post dans la base de donnée
+// Middleware pour ajouter un commentaire dans un post de la base de donnée
 
 exports.modifyPost = (req, res, next) => {
-   const postObject = req.file ? {
-      ...JSON.parse(req.body.post),
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-   } : { ...req.body };
+   
+   const postObject = req.body.newComment;
 
-   delete postObject._userId;
-   post.findOne({ _id: req.params.id })
+   Post.findOne({ _id: req.params.id })
       .then((post) => {
-         if (post.userId != req.auth.userId) {
-            res.status(401).json({ message: 'Not authorized' });
-         } else {
-            console.log(postObject);
-            post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
-               .then(() => res.status(200).json({ message: 'modified post' }))
-               .catch(error => res.status(401).json({ error }));
-         }
+         console.log(req.params.id +" ---- "+postObject);
+         Post.updateOne({ _id: req.params.id }, { $push: { "comments": postObject }} ,{ upsert: true })
+            .then(() => res.status(200).json({ message: 'modified post' }))
+            .catch(error => res.status(401).json({ error }));
       })
       .catch((error) => {
          res.status(400).json({ error });
@@ -54,7 +47,7 @@ exports.modifyPost = (req, res, next) => {
 // Middleware pour effacer une post dans la base de donnée
 
 exports.deletePost = (req, res, next) => {
-   post.findOne({ _id: req.params.id })
+   Post.findOne({ _id: req.params.id })
       .then(post => {
          if (post.userId != req.auth.userId) {
             res.status(401).json({ message: 'Not authorized' });
@@ -62,7 +55,7 @@ exports.deletePost = (req, res, next) => {
             const filename = post.imageUrl.split('/images/')[1];
             // suppression asynchrone du fichier physiquement sur le disque
             fs.unlink(`images/${filename}`, () => {
-               post.deleteOne({ _id: req.params.id }) // suppression dans la base de données
+               Post.deleteOne({ _id: req.params.id }) // suppression dans la base de données
                   .then(() => { res.status(200).json({ message: 'post removed' }) })
                   .catch(error => res.status(401).json({ error }));
             });
@@ -76,7 +69,7 @@ exports.deletePost = (req, res, next) => {
 // Middleware pour la récupération d'une post par son id
 
 exports.getOnePost = (req, res, next) => {
-   post.findOne({ _id: req.params.id })
+   Post.findOne({ _id: req.params.id })
       .then(post => res.status(200).json(post))
       .catch(error => res.status(404).json({ error }));
 };

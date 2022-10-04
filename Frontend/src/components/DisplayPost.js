@@ -34,7 +34,8 @@ export default function DisplayPost(props) {
                                    usersLiked={pt.usersLiked}
                                    usersDisliked={pt.usersDisliked}
                                    userId={props.userIdPass}
-                                   token={props.tokenPass}                              
+                                   token={props.tokenPass}
+                                   comments={pt.comments}                           
       />))}
   </div>
   )

@@ -6,24 +6,46 @@ import logoDislike from '../assets/logo_dislike.svg'
 
 export default function Affiche(props) {
 
-  let [ onFirst, setOnfirst ] = useState(true);
+  let [ onFirst, setOnfirst ] = useState(true);   // un seul appel à l'initialisation des boutons Like / Dislike
 
-  let [ onComment, setOncomment ] = useState(false);
-  let [ onLike, setOnlike ] = useState(false);
-  let [ onDislike, setOndislike ] = useState(false);
+  let [ onComment, setOncomment ] = useState(false);    // affichage du formulaire de commentaire
 
-  let [ onButtonLike, setOnbuttonlike ] = useState(true);
-  let [ onButtonDislike, setOnbuttondislike ] = useState(true);
+  let [ onLike, setOnlike ] = useState(false);          // appui sur le bouton like
+  let [ onDislike, setOndislike ] = useState(false);    // appui sur le bouton dislike
 
-  let [ nbLike, setNblike ] = useState(props.likes);
-  let [ nbDislike, setNbdislike ] = useState(props.dislikes);
+  let [ onButtonLike, setOnbuttonlike ] = useState(true);        // bouton like visible
+  let [ onButtonDislike, setOnbuttondislike ] = useState(true);  // bouton dislike visible
+
+  let [ nbLike, setNblike ] = useState(props.likes);            // nombre de like du post
+  let [ nbDislike, setNbdislike ] = useState(props.dislikes);   // nombre de dislike du post
+
+  // fonction pour la mise à jour des commentaires dans la base de données
 
   function sendInfos(e) {
     e.preventDefault()
-    setOncomment(!onComment);
+
+    let requete = {
+      "newComment": e.target['comment'].value    // envoi du nouveau commentaire
+    }
+
+    const config = {     
+      headers: { 'Authorization': `Bearer ${props.token}`}      // envoi du jeton de l'utilisateur actuel
+    }
+
+    axios.put(`http://localhost:4000/api/posts/${props._id}`, requete, config)    // envoi au serveur Backend
+      .then(function(value) {
+        props.comments.push(e.target['comment'].value);
+        console.log(value.data.message);
+        setOncomment(false);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+    });
   }
 
-  if (onFirst) {
+// Initialisation au premier appel de l'état des boutons LIKE /DISLIKE
+
+  if (onFirst) {                                        
     if (props.usersLiked.includes(props.userId)) {
       setOnlike(true);
       setOnbuttondislike(false);
@@ -38,14 +60,16 @@ export default function Affiche(props) {
   const tabLike = [];     // création de la ligne des LIKE
 
   for (let index = 0; index < nbLike; index++) {
-    tabLike.push(<img src={logoLike} alt='logo like' />); 
+    tabLike.push(<img src={logoLike} alt='logo like' />);     // Génération du HTML
   }
 
   const tabdisLike = [];  // création de la ligne des DISLIKE
 
   for (let index = 0; index < nbDislike; index++) {
-    tabdisLike.push(<img src={logoDislike} alt='logo dislike' />); 
+    tabdisLike.push(<img src={logoDislike} alt='logo dislike' />);  // Génération du HTML
   }
+
+  // Fonction pour gérer l'appui sur le bouton LIKE
 
   function like() { 
     let code = 0;
@@ -62,6 +86,8 @@ export default function Affiche(props) {
     majLike(code);
   }
 
+  // Fonction pour gérer l'appui sur le bouton DISLIKE
+
   function dislike() {
     let code = 0;
     if (!onDislike){
@@ -77,17 +103,22 @@ export default function Affiche(props) {
     majLike(code);
   }
 
+  // fonction pour la mise à jour du système de Like / Dislike
+  //
+  // codeLike : code a transmettre au serveur
+  //
+
   function majLike(codeLike) {
 
     let requete = {
-      "like": codeLike 
+      "like": codeLike    // envoi du code correspondant à l'action (-1 0 1) sur le serveur
     }; 
 
     const config = {     
-      headers: { 'Authorization': `Bearer ${props.token}`}
+      headers: { 'Authorization': `Bearer ${props.token}`}      // envoi du jeton de l'utilisateur actuel
     }
 
-    axios.post(`http://localhost:4000/api/posts/${props._id}/like`, requete, config)
+    axios.post(`http://localhost:4000/api/posts/${props._id}/like`, requete, config)    // envoi au serveur Backend
       .then(function(value) {
         console.log(value.data.message);
       })
@@ -95,6 +126,8 @@ export default function Affiche(props) {
         console.log(err.response.data.message);
     });
   }
+
+  // Génération du code HTML
 
   return (
     <div className='cadre'>
@@ -117,10 +150,7 @@ export default function Affiche(props) {
           <textarea name="comment" rows="4" defaultValue={''} />
           <button type="submit">Envoyer</button>
         </form>}
-        <p>{onButtonLike?"VRAI":"FAUX"}</p>
-        <p>{onButtonDislike?"VRAI":"FAUX"}</p>
-        <p>Le chat est là</p>
-        <p>Le chien est là</p>
+        {props.comments.map(pt =>(<p>{pt}</p>))}
       </div>
     </div>
   )
