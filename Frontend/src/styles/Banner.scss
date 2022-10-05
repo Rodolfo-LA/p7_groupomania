@@ -195,7 +195,7 @@ figure {
   width: 89%;
   border-radius: 13px;
   background-color: white;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.498);
+  box-shadow: 3px 3px 18px rgba(0, 0, 0, 0.498);
 }
 
 .cadre-bouton {
@@ -212,22 +212,27 @@ figure {
     font-size: 110%;
     width: 90%;
     background-color: $secColor;
-    border: solid 1px black;
+    //border: solid 1px black;
     border-radius: 6px;
     margin: 3px 0px 15px 0px;
     padding: 3px;
     padding-left: 9px;
   }
   & form {
+    margin-top: 0px;
     margin-bottom: 12px;
-    width: 84%;
-    border: solid 2px red;
+    width: 90%;
+    //border: solid 2px red;
   }
   & form textarea{
     font-family: Lato;
     font-size: 100%;
     margin-bottom: 12px;
     width: 100%;
+  }
+  & form button {
+    margin: 0px;
+    font-size: 75%;
   }
 }
 
@@ -240,4 +245,5 @@ figure {
 
 .infosupp {
   text-align: center;
+  margin: 6px auto;
 }
