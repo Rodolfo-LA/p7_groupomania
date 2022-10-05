@@ -5,6 +5,12 @@
     src: url(../assets/fonts/Lato-Bold.ttf);
 }
 
+body {
+
+  width: 900px;
+  margin: 0 auto;
+}
+
 h1 {
   font-family: Lato;
   font-size: 200%;
@@ -45,7 +51,7 @@ button {
 .button--supp {
   display: block;
   position: relative;
-  bottom: 360px;
+  bottom: 328px;
   left: 6px;
   border-radius: 22px;
   width: 44px;
@@ -70,6 +76,8 @@ button {
 .logo {
   display: block;
   margin: auto;
+  padding: auto;
+  width: 100%;
   background-color: rgba(255, 0, 0, 0.1);
 }
 

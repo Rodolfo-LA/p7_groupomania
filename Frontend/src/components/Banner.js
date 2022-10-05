@@ -8,7 +8,7 @@ export default function Banner() {
     return (
       <div>
         <h1 className='roro'>Le réseau interne d'entreprise</h1>
-        <img src={logo} alt='logo grouponmania' className='logo' />
+        <img className='roro' src={logo} alt='logo grouponmania' className='logo' />
         <nav className='menu'>
           <Link to="/ins">Inscrivez-vous</Link>
           <Link to="/con">connectez-vous</Link>
