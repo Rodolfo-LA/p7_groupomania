@@ -18,8 +18,8 @@ function App() {
                 <Route path="/ins" element={<Inscription/>} />
                 <Route path="/con" element={<Connexion/>} />
                 <Route path="/env/:token/:userId" element={<Envoi/>} />
-                <Route path="/create" element={<CreatePost/>} />
-                <Route path="/display" element={<DisplayPost/>} /> 
+                {/*<Route path="/create" element={<CreatePost/>} />
+                <Route path="/display" element={<DisplayPost/>} /> */}
             </Routes>
             <Footer />
         </div>

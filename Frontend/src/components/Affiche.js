@@ -166,7 +166,7 @@ export default function Affiche(props) {
         {onComment && 
         <form onSubmit={sendInfos}>
           <textarea name="comment" rows="4" defaultValue={''} />
-          <button type="submit">Envoyer</button>
+          <button type="submit">Poster</button>
         </form>}
         {props.comments.map(pt =>(<p>{pt}</p>))}
       </div>
