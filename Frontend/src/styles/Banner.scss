@@ -1,3 +1,7 @@
+$priColor: #FD2D01;
+$secColor: #FFD7D7;
+$terColor: #4E5166;
+
 @font-face {
     font-family: Lato;
     font-weight: bold;
@@ -6,17 +10,18 @@
 }
 
 body {
-
   width: 900px;
   margin: 0 auto;
+  font-family: Lato;
 }
 
 h1 {
   font-family: Lato;
-  font-size: 200%;
+  font-size: 133%;
   text-align: center;
-  color: blue;
-  background-color: #FFD7D7;
+  margin: 0 auto;
+  color: white;
+  background-color: black;
 }
 
 button {
@@ -25,7 +30,7 @@ button {
   width: 150px;
   border-radius: 9px;
   color : white;
-  background-color: red;
+  background-color: $priColor;
   font-family: Lato;
   font-size: 100%;
   border-style: hidden;
@@ -39,9 +44,9 @@ button {
 }
 
 .button--off {
-   background-color: grey;
+   background-color: $terColor;
    &:hover {
-    background-color: grey;
+    background-color: $terColor;
    }
    &:active {
     scale: 100%;
@@ -51,7 +56,7 @@ button {
 .button--supp {
   display: block;
   position: relative;
-  bottom: 328px;
+  bottom: 470px;
   left: 6px;
   border-radius: 22px;
   width: 44px;
@@ -60,25 +65,30 @@ button {
 }
 
 .options {
-  background-color: black;
+  background-color: $terColor;
   display: flex;
   justify-content: space-evenly;
 }
 
 .roro {
-  color: #FD2D01;
   font-family: Lato;
-  font-size: 100%;
+  font-size: 120%;
   text-align:  center;
-  background-color: #FFD7D7;
+  padding: 9px 0px 9px 0px;
+  color: $terColor;
+  background-color: $secColor;
+  border-radius: 9px;
+  box-shadow: 0px 6px 9px $terColor;
 }
 
 .logo {
   display: block;
-  margin: auto;
-  padding: auto;
-  width: 100%;
-  background-color: rgba(255, 0, 0, 0.1);
+  margin: 3px auto;
+  padding: 1% 29%;
+  width: 42%;
+  border: solid $secColor;
+  border-radius: 30px;
+  background-color: white;
 }
 
 .menu {
@@ -90,8 +100,7 @@ button {
 }
 
 .pied {
-  margin-top: 50px;
-  background-color: black;
+  background-color: $terColor;
   color: white;
   text-align: center;
   height: 100px;
@@ -106,7 +115,7 @@ button {
 
 .menu a {
   color: white;
-  background-color: blue;
+  background-color: $terColor;
   padding: 9px;
   text-decoration: none;
   border-radius: 9px;
@@ -116,15 +125,18 @@ form {
   display: flex;
   align-items: center;
   flex-flow: column;
-  background-color: #e9694f87;
+  background-color: $terColor;
   font-family: Lato;
   font-size: 130%;
-  color: #FD2D01;
+  color: white;
   width: 460px;
   margin: auto;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.498);
+  & a {
+    color: white;
+  }
 }
 label, input {
   font-size: 120%;
@@ -138,6 +150,8 @@ label, input {
   flex-direction: column;
   align-items: center;
   font-family: Lato;
+  background-color: $secColor;
+  padding-bottom: 42px;
 }
 
 figure {
@@ -167,8 +181,9 @@ figure {
   position: relative;
   border: solid 1px black;
   margin: 9px;
-  width: 60%;
+  width: 89%;
   border-radius: 13px;
+  background-color: white;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.498);
 }
 
@@ -187,7 +202,7 @@ figure {
     width: 90%;
     border: solid 1px black;
     border-radius: 6px;
-    margin: 3px 0px 3px 0px;
+    margin: 3px 0px 15px 0px;
     padding: 3px;
   }
   & form {

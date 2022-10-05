@@ -30,7 +30,7 @@ export default function Envoi() {
   
   return (
     <div>
-      <h1>Affichage des Posts</h1>
+      <h1>Connecté</h1>
       <div className="options">
         <button onClick={() => setButtonCreate(!buttonCreate)}>Créer</button>
         <button>Modifier</button>
