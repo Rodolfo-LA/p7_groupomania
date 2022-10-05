@@ -151,8 +151,8 @@ export default function Affiche(props) {
       <figure>
         <img src={props.source} alt='ma photo' />
         <figcaption>{props.titre}</figcaption>
+        {(props.delPost && (props.userId==props.userPost)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}
       </figure>
-       {(props.delPost && (props.userId==props.userPost)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}
       <div className='like'>
         {tabLike}
         {tabdisLike}
