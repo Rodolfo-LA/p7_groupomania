@@ -4,7 +4,7 @@ import axios from 'axios'
 import logoLike from '../assets/logo_like.svg'
 import logoDislike from '../assets/logo_dislike.svg'
 
-export default function Affiche(props) {
+export default function CardPost(props) {
 
   let [ onFirst, setOnfirst ] = useState(true);   // un seul appel à l'initialisation des boutons Like / Dislike
 
@@ -18,6 +18,13 @@ export default function Affiche(props) {
 
   let [ nbLike, setNblike ] = useState(props.likes);            // nombre de like du post
   let [ nbDislike, setNbdislike ] = useState(props.dislikes);   // nombre de dislike du post
+
+  // fonction pour effacer un Post
+
+  function modifyPost() {
+
+        // a compléter
+  }
 
   // fonction pour effacer un Post
 
@@ -151,7 +158,11 @@ export default function Affiche(props) {
       <figure>
         <img src={props.source} alt='ma photo' />
         <figcaption>{props.titre}</figcaption>
+{/*
         {(props.delPost && (props.userId==props.userPost)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}
+
+  */}
+        {(props.delPost && (props.userId==props.userPost)) && <button className='button--supp' onClick={() => modifyPost()}>M</button>}
       </figure>
       <div className='like'>
         {tabLike}

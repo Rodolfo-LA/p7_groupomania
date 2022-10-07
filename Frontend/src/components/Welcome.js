@@ -2,8 +2,9 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import symbole from '../assets/symbole_groupomania.svg'
 
+// Fonction page d'accueil
 
-export default function Premiere() {
+export default function Welcome() {
   return (
     <div>
         <nav className='menu'>

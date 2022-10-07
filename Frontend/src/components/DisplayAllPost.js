@@ -1,10 +1,11 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
-import Affiche from './Affiche'
+import Affiche from './CardPost'
+import CardPost from './CardPost';
 
 // Fonction pour afficher la liste des Posts
 
-export default function DisplayPost(props) {
+export default function DisplayAllPost(props) {
 
   let [tabPosts, updateTabPosts] = useState([]);        // Array qui contient les posts
   let [closePost, updateClosepost] = useState(false);   // Indique si un post à été supprimer
@@ -33,7 +34,7 @@ export default function DisplayPost(props) {
 
   return (
     <div className='dispo'>
-      {tabPosts.map(pt =>(<Affiche key={pt._id}
+      {tabPosts.map(pt =>(<CardPost key={pt._id}
                                    _id={pt._id}
                                    titre={pt.name}
                                    source={pt.imageUrl}
