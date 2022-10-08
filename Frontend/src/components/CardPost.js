@@ -4,11 +4,14 @@ import axios from 'axios'
 import logoLike from '../assets/logo_like.svg'
 import logoDislike from '../assets/logo_dislike.svg'
 
+import ModifyCardPost from './ModifyCardPost'
+
 export default function CardPost(props) {
 
   let [ onFirst, setOnfirst ] = useState(true);   // un seul appel à l'initialisation des boutons Like / Dislike
 
   let [ onComment, setOncomment ] = useState(false);    // affichage du formulaire de commentaire
+  let [ onModify, setOnmodify ] = useState(false);    // affichage du formulaire de modification
 
   let [ onLike, setOnlike ] = useState(false);          // appui sur le bouton like
   let [ onDislike, setOndislike ] = useState(false);    // appui sur le bouton dislike
@@ -22,7 +25,7 @@ export default function CardPost(props) {
   // fonction pour effacer un Post
 
   function modifyPost() {
-
+    setOnmodify(!onModify);
         // a compléter
   }
 
@@ -155,32 +158,32 @@ export default function CardPost(props) {
 
   return (
     <div className='cadre'>
-      <figure>
-        <img src={props.source} alt='ma photo' />
-        <figcaption>{props.titre}</figcaption>
-{/*
-        {(props.delPost && (props.userId==props.userPost)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}
-
-  */}
-        {(props.delPost && (props.userId==props.userPost)) && <button className='button--supp' onClick={() => modifyPost()}>M</button>}
-      </figure>
-      <div className='like'>
-        {tabLike}
-        {tabdisLike}
+      <div className={onModify ? 'opaque':''}>
+        <figure >
+          <img src={props.source} alt='ma photo' className={onModify? 'masq':null}/>     {/* alt à compléter */}
+          <figcaption>{props.titre}</figcaption>
+        </figure>
+        <div className='like'>
+          {tabLike}
+          {tabdisLike}
+        </div>
+        <div className='cadre-bouton'>
+          <button onClick={() => setOncomment(!onComment)}>Commenter</button>
+          {onButtonLike ? <button onClick={() => like()}>Like</button>:<button className='button--off'>Like</button>}
+          {onButtonDislike ? <button onClick={() => dislike()}>Dislike</button>:<button className='button--off'>Dislike</button>}
+        </div>
+        <div className='cadre-comment'>
+          {onComment && 
+          <form onSubmit={sendInfos}>
+            <textarea name="comment" rows="4" defaultValue={''} />
+            <button type="submit">Poster</button>
+          </form>}
+          {props.comments.map(pt =>(<p>{pt}</p>))}
+        </div>
       </div>
-      <div className='cadre-bouton'>
-        <button onClick={() => setOncomment(!onComment)}>Commenter</button>
-        {onButtonLike ? <button onClick={() => like()}>Like</button>:<button className='button--off'>Like</button>}
-        {onButtonDislike ? <button onClick={() => dislike()}>Dislike</button>:<button className='button--off'>Dislike</button>}
-      </div>
-      <div className='cadre-comment'>
-        {onComment && 
-        <form onSubmit={sendInfos}>
-          <textarea name="comment" rows="4" defaultValue={''} />
-          <button type="submit">Poster</button>
-        </form>}
-        {props.comments.map(pt =>(<p>{pt}</p>))}
-      </div>
+      {(props.delPost  && (props.userId==props.userPost)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}
+      {(props.modPost  && (props.userId==props.userPost)) && <button className='button--supp' onClick={() => modifyPost()}>M</button>}
+      {onModify && <ModifyCardPost titre={props.titre}/>}
     </div>
   )
 }

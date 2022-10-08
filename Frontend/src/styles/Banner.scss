@@ -149,6 +149,33 @@ form {
     color: white;
   }
 }
+
+.modifyPost {
+  position: absolute;
+  left: 20.5%;
+  top: 0%;
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  background-color: $terColor;
+  font-family: Lato;
+  font-size: 130%;
+  color: white;
+  width: 460px;
+  margin: 90px auto;
+  padding: 9px;
+  border-radius: 12px;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.498);
+  & a {
+    color: white;
+  }
+  & p {
+    text-align: center;
+    font-style: italic;
+    font-variant: small-caps;
+  }
+}
+
 label, input {
   font-size: 120%;
   padding: 9px;
@@ -187,6 +214,9 @@ figure {
   }
 }
 
+.opaque {
+  opacity: 0.33;
+}
 .cadre {
   display: block;
   position: relative;

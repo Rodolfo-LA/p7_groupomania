@@ -47,6 +47,7 @@ export default function DisplayAllPost(props) {
                                    userId={props.userIdPass}
                                    token={props.tokenPass}
                                    delPost={props.delPost}
+                                   modPost={props.modPost}
                                    fnclosePost={updateClosepost}                        
       />))}
   </div>

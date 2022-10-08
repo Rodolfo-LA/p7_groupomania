@@ -41,7 +41,12 @@ export default function ManagementPost() {
       </div>
       {ButtondelPost && <p className='infosupp'>Cliquez sur la croix (X) pour supprimer un post</p>}
       {buttonCreate && <CreatePost tokenPass={token} majOnpost={setOnpost}/>} 
-      <DisplayAllPost tokenPass={token} userIdPass={userId} getPost={onGetpost} fnGetpost={setOngetpost} delPost={ButtondelPost}/>
+      <DisplayAllPost tokenPass={token}
+                      userIdPass={userId}
+                      getPost={onGetpost}
+                      fnGetpost={setOngetpost}
+                      delPost={ButtondelPost}
+                      modPost={buttonModify}/>
     </div>
   )
 }
