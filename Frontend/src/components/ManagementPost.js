@@ -7,11 +7,14 @@ import DisplayAllPost from './DisplayAllPost'
 
 export default function ManagementPost() {
 
-  let [ ButtondelPost, setOnbuttondelPost ] = useState(false);  // Etat du bouton Supprimer
-
   let { token, userId } = useParams();
-  let [ buttonCreate, setButtonCreate ] = useState(false);
-  let [ buttonModify, setButtonModify ] = useState(false);
+  let [ onCreate, setCreate ] = useState(false);    // appui
+  let [ onModify, setModify ] = useState(false);    //appui
+  let [ onSupp, setSupp ] = useState(false);    //appui
+
+  let [ onButtonSupp, setOnbuttonSupp ] = useState(true);    // visible
+  let [ onButtonModify, setOnbuttonModify ] = useState(true);    // visible
+  
   
   let [onPost, setOnpost] = useState(false);
   let [onGetpost, setOngetpost] = useState(true);
@@ -22,8 +25,30 @@ export default function ManagementPost() {
     navigate(`/`);
   }
 
+  function Modify() {
+    if (onModify) {
+      setModify(false);
+      setOnbuttonSupp(true);
+    }
+    else {
+      setModify(true);
+      setOnbuttonSupp(false);
+    }
+  }
+
+  function Supp() {
+    if (onSupp) {
+      setSupp(false)
+      setOnbuttonModify(true);
+    }
+    else {
+      setSupp(true)
+      setOnbuttonModify(false);
+    }
+  }
+
   function maj(){
-    setButtonCreate(false);
+    setCreate(false);
     setOnpost(false);
     setOngetpost(true);
   }
@@ -34,19 +59,19 @@ export default function ManagementPost() {
     <div>
       <h1>Connecté</h1>
       <div className="options">
-        <button onClick={() => setButtonCreate(!buttonCreate)}>Créer</button>
-        <button onClick={() => setButtonModify(!buttonModify)}>Modifier</button>
-        <button onClick={() => setOnbuttondelPost(!ButtondelPost)}>Supprimer</button>
+        <button onClick={() => setCreate(!onCreate)}>Créer</button>
+        {onButtonModify ? <button onClick={() => Modify()}>Modifier</button>:<button className='button--off'>Modifier</button>}
+        {onButtonSupp ? <button onClick={() => Supp()}>Supprimer</button>:<button className='button--off'>Supprimer</button>}
         <button onClick={retour}>Se déconnecter</button>
       </div>
-      {ButtondelPost && <p className='infosupp'>Cliquez sur la croix (X) pour supprimer un post</p>}
-      {buttonCreate && <CreatePost tokenPass={token} majOnpost={setOnpost}/>} 
+      {onSupp && <p className='infosupp'>Cliquez sur la croix (X) pour supprimer un post</p>}
+      {onCreate && <CreatePost tokenPass={token} majOnpost={setOnpost}/>} 
       <DisplayAllPost tokenPass={token}
                       userIdPass={userId}
                       getPost={onGetpost}
                       fnGetpost={setOngetpost}
-                      delPost={ButtondelPost}
-                      modPost={buttonModify}/>
+                      delPost={onSupp}
+                      modPost={onModify}/>
     </div>
   )
 }

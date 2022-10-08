@@ -158,7 +158,7 @@ export default function CardPost(props) {
 
   return (
     <div className='cadre'>
-      <div className={onModify ? 'opaque':''}>
+      <div className={(onModify && props.modPost) ? 'opaque':''}>
         <figure >
           <img src={props.source} alt='ma photo' className={onModify? 'masq':null}/>     {/* alt à compléter */}
           <figcaption>{props.titre}</figcaption>
@@ -183,7 +183,7 @@ export default function CardPost(props) {
       </div>
       {(props.delPost  && (props.userId==props.userPost)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}
       {(props.modPost  && (props.userId==props.userPost)) && <button className='button--supp' onClick={() => modifyPost()}>M</button>}
-      {onModify && <ModifyCardPost titre={props.titre}/>}
+      {props.modPost && onModify && <ModifyCardPost titre={props.titre}/>}
     </div>
   )
 }
