@@ -8,6 +8,8 @@ import ModifyCardPost from './ModifyCardPost'
 
 export default function CardPost(props) {
 
+  //console.log(props.post.pt.comments);
+
   let [ onFirst, setOnfirst ] = useState(true);   // un seul appel à l'initialisation des boutons Like / Dislike
 
   let [ onComment, setOncomment ] = useState(false);    // affichage du formulaire de commentaire
@@ -19,8 +21,8 @@ export default function CardPost(props) {
   let [ onButtonLike, setOnbuttonlike ] = useState(true);        // bouton like visible
   let [ onButtonDislike, setOnbuttondislike ] = useState(true);  // bouton dislike visible
 
-  let [ nbLike, setNblike ] = useState(props.likes);            // nombre de like du post
-  let [ nbDislike, setNbdislike ] = useState(props.dislikes);   // nombre de dislike du post
+  let [ nbLike, setNblike ] = useState(props.post.pt.likes);            // nombre de like du post
+  let [ nbDislike, setNbdislike ] = useState(props.post.pt.dislikes);   // nombre de dislike du post
 
   // fonction pour effacer un Post
 
@@ -37,7 +39,7 @@ export default function CardPost(props) {
       headers: { 'Authorization': `Bearer ${props.token}`}      // envoi du jeton de l'utilisateur actuel
     }
 
-    axios.delete(`http://localhost:4000/api/posts/${props._id}`, config)    // envoi au serveur Backend
+    axios.delete(`http://localhost:4000/api/posts/${props.post.pt._id}`, config)    // envoi au serveur Backend
       .then(function(value) {
         props.fnclosePost(true);
       })
@@ -59,9 +61,9 @@ export default function CardPost(props) {
       headers: { 'Authorization': `Bearer ${props.token}`}      // envoi du jeton de l'utilisateur actuel
     }
 
-    axios.put(`http://localhost:4000/api/posts/${props._id}`, requete, config)    // envoi au serveur Backend
+    axios.put(`http://localhost:4000/api/posts/${props.post.pt._id}`, requete, config)    // envoi au serveur Backend
       .then(function(value) {
-        props.comments.push(e.target['comment'].value);
+        props.post.pt.comments.push(e.target['comment'].value);
         console.log(value.data.message);
         setOncomment(false);
       })
@@ -73,11 +75,11 @@ export default function CardPost(props) {
 // Initialisation au premier appel de l'état des boutons LIKE /DISLIKE
 
   if (onFirst) {                                        
-    if (props.usersLiked.includes(props.userId)) {
+    if (props.post.pt.usersLiked.includes(props.post.pt.userId)) {
       setOnlike(true);
       setOnbuttondislike(false);
     }
-    if (props.usersDisliked.includes(props.userId)) {
+    if (props.post.pt.usersDisliked.includes(props.post.pt.userId)) {
       setOndislike(true);
       setOnbuttonlike(false);
     }
@@ -145,7 +147,7 @@ export default function CardPost(props) {
       headers: { 'Authorization': `Bearer ${props.token}`}      // envoi du jeton de l'utilisateur actuel
     }
 
-    axios.post(`http://localhost:4000/api/posts/${props._id}/like`, requete, config)    // envoi au serveur Backend
+    axios.post(`http://localhost:4000/api/posts/${props.post.pt._id}/like`, requete, config)    // envoi au serveur Backend
       .then(function(value) {
         console.log(value.data.message);
       })
@@ -160,8 +162,8 @@ export default function CardPost(props) {
     <div className='cadre'>
       <div className={(onModify && props.modPost) ? 'opaque':''}>
         <figure >
-          <img src={props.source} alt='ma photo' className={onModify? 'masq':null}/>     {/* alt à compléter */}
-          <figcaption>{props.titre}</figcaption>
+          <img src={props.post.pt.imageUrl} alt='ma photo' className={onModify? 'masq':null}/>     {/* alt à compléter */}
+          <figcaption>{props.post.pt.name}</figcaption>
         </figure>
         <div className='like'>
           {tabLike}
@@ -178,12 +180,12 @@ export default function CardPost(props) {
             <textarea name="comment" rows="2" defaultValue={''} />
             <button type="submit">Poster</button>
           </form>}
-          {props.comments.map(pt =>(<p>{pt}</p>))}
+          {props.post.pt.comments.map(pt =>(<p>{pt}</p>))}
         </div>
       </div>
-      {(props.delPost  && (props.userId==props.userPost)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}
-      {(props.modPost  && (props.userId==props.userPost)) && <button className='button--supp' onClick={() => modifyPost()}>M</button>}
-      {props.modPost && onModify && <ModifyCardPost titre={props.titre}/>}
+      {(props.delPost  && (props.userId==props.post.pt.userId)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}
+      {(props.modPost  && (props.userId==props.post.pt.userId)) && <button className='button--supp' onClick={() => modifyPost()}>M</button>}
+      {props.modPost && onModify && <ModifyCardPost titre={props.post.pt.name}/>}
     </div>
   )
 }

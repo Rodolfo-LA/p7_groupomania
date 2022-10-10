@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
-import Affiche from './CardPost'
 import CardPost from './CardPost';
 
 // Fonction pour afficher la liste des Posts
@@ -34,21 +33,9 @@ export default function DisplayAllPost(props) {
 
   return (
     <div className='dispo'>
-      {tabPosts.map(pt =>(<CardPost key={pt._id}
-                                   _id={pt._id}
-                                   titre={pt.name}
-                                   source={pt.imageUrl}
-                                   likes={pt.likes}
-                                   dislikes={pt.dislikes}
-                                   usersLiked={pt.usersLiked}
-                                   usersDisliked={pt.usersDisliked}
-                                   comments={pt.comments}
-                                   userPost={pt.userId}
-                                   userId={props.userIdPass}
-                                   token={props.tokenPass}
-                                   delPost={props.delPost}
-                                   modPost={props.modPost}
-                                   fnclosePost={updateClosepost}                        
+      {tabPosts.map(pt =>(<CardPost key={pt._id} post={{pt}} userId={props.userIdPass}
+                                    token={props.tokenPass} delPost={props.delPost}
+                                    modPost={props.modPost} fnclosePost={updateClosepost}                        
       />))}
   </div>
   )
