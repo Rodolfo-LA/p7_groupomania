@@ -1,39 +1,39 @@
-$priColor: #FD2D01;
-$secColor: #FFD7D7;
-$terColor: #4E5166;
-
 @font-face {
-    font-family: Lato;
-    font-weight: normal;
-    font-style: normal;
-    src: url(../assets/fonts/Lato-Bold.ttf);
+  font-family: Lato;
+  font-weight: bold;
+  font-style: bold;
+  src: url(../assets/fonts/Lato-Bold.ttf);
 }
-
-@font-face {
-  font-family: Lato-med;
-  font-weight: normal;
-  font-style: normal;
-  src: url(../assets/fonts/Lato-Medium.ttf);
-}
-
 body {
   width: 900px;
   margin: 0 auto;
   font-family: Lato;
 }
 
-@keyframes tourne {
-  
-  from {rotate: 0deg;}
-  to {rotate: 360deg;}
+@-webkit-keyframes tourne {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
 }
 
-.symbole {  
+@keyframes tourne {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+.symbole {
   display: block;
   margin: auto;
   padding: 7% 29%;
   width: 42%;
-  animation: tourne 6s linear infinite;
+  -webkit-animation: tourne 6s linear infinite;
+          animation: tourne 6s linear infinite;
 }
 
 h1 {
@@ -52,28 +52,28 @@ button {
   padding: 9px;
   width: 150px;
   border-radius: 9px;
-  color : white;
-  background-color: $priColor;
+  color: white;
+  background-color: #FD2D01;
   font-family: Lato;
   font-size: 100%;
   border-style: hidden;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.498);
-  &:hover {
-    background-color: rgb(147, 0, 0);
-  }
-  &:active {
-    scale: 95%;
-  }
+}
+button:hover {
+  background-color: rgb(147, 0, 0);
+}
+button:active {
+  scale: 95%;
 }
 
 .button--off {
-   background-color: $terColor;
-   &:hover {
-    background-color: $terColor;
-   }
-   &:active {
-    scale: 100%;
-  }
+  background-color: #4E5166;
+}
+.button--off:hover {
+  background-color: #4E5166;
+}
+.button--off:active {
+  scale: 100%;
 }
 
 .button--supp {
@@ -88,7 +88,7 @@ button {
 }
 
 .options {
-  background-color: $terColor;
+  background-color: #4E5166;
   display: flex;
   justify-content: space-evenly;
 }
@@ -96,12 +96,12 @@ button {
 .roro {
   font-family: Lato;
   font-size: 120%;
-  text-align:  center;
+  text-align: center;
   padding: 9px 0px 9px 0px;
-  color: $terColor;
-  background-color: $secColor;
+  color: #4E5166;
+  background-color: #FFD7D7;
   border-radius: 9px;
-  box-shadow: 0px 6px 9px $terColor;
+  box-shadow: 0px 6px 9px #4E5166;
 }
 
 .logo {
@@ -109,7 +109,7 @@ button {
   margin: 3px auto;
   padding: 1% 29%;
   width: 42%;
-  border: solid $secColor;
+  border: solid #FFD7D7;
   border-radius: 30px;
   background-color: white;
 }
@@ -124,7 +124,7 @@ button {
 }
 
 .pied {
-  background-color: $terColor;
+  background-color: #4E5166;
   color: white;
   text-align: center;
   height: 100px;
@@ -133,7 +133,7 @@ button {
 
 .menu a {
   color: white;
-  background-color: $terColor;
+  background-color: #4E5166;
   padding: 9px;
   text-decoration: none;
   border-radius: 9px;
@@ -143,7 +143,7 @@ form {
   display: flex;
   align-items: center;
   flex-flow: column;
-  background-color: $terColor;
+  background-color: #4E5166;
   font-family: Lato;
   font-size: 130%;
   color: white;
@@ -152,19 +152,19 @@ form {
   padding: 9px;
   border-radius: 12px;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.498);
-  & a {
-    color: white;
-  }
+}
+form a {
+  color: white;
 }
 
 .modifyPost {
   position: absolute;
   left: 20.5%;
-  top: -50px;
+  top: 0%;
   display: flex;
   align-items: center;
   flex-flow: column;
-  background-color: $terColor;
+  background-color: #4E5166;
   font-family: Lato;
   font-size: 130%;
   color: white;
@@ -173,34 +173,14 @@ form {
   padding: 9px;
   border-radius: 12px;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.498);
-  & img {
-    margin-top: 16px;
-    width: 67%;
-    border-radius: 9px;
-  }
-  & a {
-    color: white;
-  }
-  & p {
-    text-align: center;
-    font-style: italic;
-    font-variant: small-caps;
-  }
-  & i {
-    display: block;
-    margin-top: 20px;
-    padding: 9px 15px;
-    font-size: 80%;
-    background-color: $priColor;
-    border-radius: 9px;
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.498);
-  }
-  & i:hover {
-    background-color: rgb(147, 0, 0);
-  }
-  & i:active {
-    scale: 95%;
-  }
+}
+.modifyPost a {
+  color: white;
+}
+.modifyPost p {
+  text-align: center;
+  font-style: italic;
+  font-variant: small-caps;
 }
 
 label, input {
@@ -209,41 +189,41 @@ label, input {
 }
 
 /* style des posts */
-
 .dispo {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: Lato;
-  background-color: $secColor;
+  background-color: #FFD7D7;
   padding-bottom: 42px;
 }
 
 figure {
   margin-top: 12px;
   margin-inline: 12px;
-  & img {
-    display: block;
-    margin: auto;
-    width: 100%;
-    border-radius: 12px;
-    top: 0%;
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.498);
-  }
-  & figcaption {
-    position: relative;
-    top: -42px;
-    margin: auto;
-    padding: 3px;
-    text-align: center;
-    font-size: 130%;
-    background-color: rgba(255, 255, 255, 0.66);
-  }
+}
+figure img {
+  display: block;
+  margin: auto;
+  width: 100%;
+  border-radius: 12px;
+  top: 0%;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.498);
+}
+figure figcaption {
+  position: relative;
+  top: -42px;
+  margin: auto;
+  padding: 3px;
+  text-align: center;
+  font-size: 130%;
+  background-color: rgba(255, 255, 255, 0.66);
 }
 
 .opaque {
   opacity: 0.33;
 }
+
 .cadre {
   display: block;
   position: relative;
@@ -264,33 +244,31 @@ figure {
   display: flex;
   flex-direction: column;
   align-items: center;
-  & p {
-    font-family: Lato-med;
-    font-size: 150%;
-    width: 90%;
-    background-color: #4e516612;
-    //border: solid 1px black;
-    border-radius: 6px;
-    margin: -9px 0px 20px 0px;
-    padding: 30px 30px 30px 22px;
-    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
-  }
-  & form {
-    margin-top: 0px;
-    margin-bottom: 12px;
-    width: 90%;
-    //border: solid 2px red;
-  }
-  & form textarea{
-    font-family: Lato;
-    font-size: 100%;
-    margin-bottom: 12px;
-    width: 106%;
-  }
-  & form button {
-    margin: 0px;
-    font-size: 75%;
-  }
+}
+.cadre-comment p {
+  font-family: Lato;
+  font-size: 110%;
+  width: 90%;
+  background-color: #FFD7D7;
+  border-radius: 6px;
+  margin: 3px 0px 15px 0px;
+  padding: 3px;
+  padding-left: 9px;
+}
+.cadre-comment form {
+  margin-top: 0px;
+  margin-bottom: 12px;
+  width: 90%;
+}
+.cadre-comment form textarea {
+  font-family: Lato;
+  font-size: 100%;
+  margin-bottom: 12px;
+  width: 100%;
+}
+.cadre-comment form button {
+  margin: 0px;
+  font-size: 75%;
 }
 
 .like {

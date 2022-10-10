@@ -175,7 +175,7 @@ export default function CardPost(props) {
         <div className='cadre-comment'>
           {onComment && 
           <form onSubmit={sendInfos}>
-            <textarea name="comment" rows="4" defaultValue={''} />
+            <textarea name="comment" rows="2" defaultValue={''} />
             <button type="submit">Poster</button>
           </form>}
           {props.comments.map(pt =>(<p>{pt}</p>))}

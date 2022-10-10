@@ -9,6 +9,7 @@ export default function Connexion(props) {
 
   function selectFile(event){
       setChoixFichier(event.target.files[0]);
+      console.log(choixFichier);
   }
 
   function retour() {
