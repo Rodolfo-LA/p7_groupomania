@@ -28,7 +28,6 @@ export default function CardPost(props) {
 
   function modifyPost() {
     setOnmodify(!onModify);
-        // a compléter
   }
 
   // fonction pour effacer un Post
@@ -185,7 +184,7 @@ export default function CardPost(props) {
       </div>
       {(props.delPost  && (props.userId==props.post.pt.userId)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}
       {(props.modPost  && (props.userId==props.post.pt.userId)) && <button className='button--supp' onClick={() => modifyPost()}>M</button>}
-      {props.modPost && onModify && <ModifyCardPost titre={props.post.pt.name}/>}
+      {props.modPost && onModify && <ModifyCardPost post={props.post.pt} titre={props.post.pt.name}/>}
     </div>
   )
 }
