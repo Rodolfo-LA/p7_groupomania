@@ -1,20 +1,50 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 export default function ModifyCardPost(props) {
 
   const [choixFichier, setChoixFichier] = useState();
   const [onSelectImg, setonSelectImg] = useState(false);
 
-  function sendInfos() {
+  let requete = {};
+  let config = {};
 
+  function sendInfos(e) {
+    e.preventDefault()
+    if (onSelectImg) {
+      setonSelectImg(false);
+      requete = new FormData();
+      requete.append('image',choixFichier );
+      requete.append('name',e.target['titre'].value);
+      config = {     
+        headers: { 'Authorization': `Bearer ${props.token}`,
+                  'content-type': 'multipart/form-data' }
+      }
+    }
+    else {
+      requete = {
+      "name": e.target['titre'].value    // envoi du nouveau titre
+      }
+      config = {     
+        headers: { 'Authorization': `Bearer ${props.token}`}      // envoi du jeton de l'utilisateur actuel
+      }
+    }
+
+    axios.put(`http://localhost:4000/api/posts/${props._id}`, requete, config)    // envoi au serveur Backend
+      .then(function(value) {
+        props.fnModify(false);    //  fermeture du formulaire de modification
+        props.fnModPost(true);    //  Un post à été modifié
+        console.log(value.data.message);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+    });
   }
 
   function selectFile(event){
     setChoixFichier(event.target.files[0]);
     setonSelectImg(true);
   }
-
-  // integration de l'appel & FormData
 
   return (
     <div >

@@ -15,7 +15,6 @@ export default function ManagementPost() {
   let [ onButtonSupp, setOnbuttonSupp ] = useState(true);    // visible
   let [ onButtonModify, setOnbuttonModify ] = useState(true);    // visible
   
-  
   let [onPost, setOnpost] = useState(false);
   let [onGetpost, setOngetpost] = useState(true);
   

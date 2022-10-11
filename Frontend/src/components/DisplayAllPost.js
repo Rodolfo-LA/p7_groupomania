@@ -8,8 +8,15 @@ export default function DisplayAllPost(props) {
 
   let [tabPosts, updateTabPosts] = useState([]);        // Array qui contient les posts
   let [closePost, updateClosepost] = useState(false);   // Indique si un post à été supprimer
+  let [modPost, updateModpost] = useState(false);       // Indique si un post à été modifier
+  
+  function EndModPost() {
+    props.fnGetpost(true);
+    updateModpost(false);
+  }
 
   useEffect(() => {props.fnGetpost(true);},[closePost]);    // Si un post est éffacé la liste est mise a jour
+  useEffect(EndModPost,[modPost]);    // Si un post est modifié la liste est mise a jour
 
   if (props.getPost) {
     const config = {     
@@ -35,7 +42,8 @@ export default function DisplayAllPost(props) {
     <div className='dispo'>
       {tabPosts.map(pt =>(<CardPost key={pt._id} post={{pt}} userId={props.userIdPass}
                                     token={props.tokenPass} delPost={props.delPost}
-                                    modPost={props.modPost} fnclosePost={updateClosepost}                        
+                                    modPost={props.modPost} fnclosePost={updateClosepost}
+                                    fnModPost={updateModpost}                       
       />))}
   </div>
   )
