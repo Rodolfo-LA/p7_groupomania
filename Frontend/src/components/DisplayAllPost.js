@@ -1,10 +1,14 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useContext} from 'react'
 import axios from 'axios'
 import CardPost from './CardPost';
+import {contextToken} from './ManagementPost'
+
 
 // Fonction pour afficher la liste des Posts
 
 export default function DisplayAllPost(props) {
+
+  const tokenPass = useContext(contextToken);   // récupération du jeton de l'utilisateur courant
 
   let [tabPosts, updateTabPosts] = useState([]);        // Array qui contient les posts
   let [closePost, updateClosepost] = useState(false);   // Indique si un post à été supprimer
@@ -16,11 +20,11 @@ export default function DisplayAllPost(props) {
   }
 
   useEffect(() => {props.fnGetpost(true);},[closePost]);    // Si un post est éffacé la liste est mise a jour
-  useEffect(EndModPost,[modPost]);    // Si un post est modifié la liste est mise a jour
+  useEffect(EndModPost,[modPost]);                          // Si un post est modifié la liste est mise a jour
 
   if (props.getPost) {
     const config = {     
-      headers: { 'Authorization': `Bearer ${props.tokenPass}`,    // transmission du jeton au serveur
+      headers: { 'Authorization': `Bearer ${tokenPass}`,    // transmission du jeton au serveur
                 'content-type': 'multipart/form-data' }
     }
     axios.get("http://localhost:4000/api/posts", config)    // appel au serveur pour récupérer la liste des posts
@@ -34,14 +38,12 @@ export default function DisplayAllPost(props) {
     });
   }
 
-  console.log(tabPosts);
-
   // Génération du code HTML
 
   return (
     <div className='dispo'>
       {tabPosts.map(pt =>(<CardPost key={pt._id} post={{pt}} userId={props.userIdPass}
-                                    token={props.tokenPass} delPost={props.delPost}
+                                    token={tokenPass} delPost={props.delPost}
                                     modPost={props.modPost} fnclosePost={updateClosepost}
                                     fnModPost={updateModpost}                       
       />))}

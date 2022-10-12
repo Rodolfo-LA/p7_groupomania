@@ -1,14 +1,14 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import axios from 'axios'
-
 import logoLike from '../assets/logo_like.svg'
 import logoDislike from '../assets/logo_dislike.svg'
-
 import ModifyCardPost from './ModifyCardPost'
+import {contextToken} from './ManagementPost'
+
 
 export default function CardPost(props) {
 
-  //console.log(props.post.pt.comments);
+  const tokenPass = useContext(contextToken);   // récupération du jeton de l'utilisateur courant
 
   let [ onFirst, setOnfirst ] = useState(true);   // un seul appel à l'initialisation des boutons Like / Dislike
 
@@ -35,7 +35,7 @@ export default function CardPost(props) {
   function deletePost() {
 
     const config = {     
-      headers: { 'Authorization': `Bearer ${props.token}`}      // envoi du jeton de l'utilisateur actuel
+      headers: { 'Authorization': `Bearer ${tokenPass}`}      // envoi du jeton de l'utilisateur actuel
     }
 
     axios.delete(`http://localhost:4000/api/posts/${props.post.pt._id}`, config)    // envoi au serveur Backend
@@ -57,7 +57,7 @@ export default function CardPost(props) {
     }
 
     const config = {     
-      headers: { 'Authorization': `Bearer ${props.token}`}      // envoi du jeton de l'utilisateur actuel
+      headers: { 'Authorization': `Bearer ${tokenPass}`}      // envoi du jeton de l'utilisateur actuel
     }
 
     axios.put(`http://localhost:4000/api/posts/${props.post.pt._id}`, requete, config)    // envoi au serveur Backend
@@ -143,7 +143,7 @@ export default function CardPost(props) {
     }; 
 
     const config = {     
-      headers: { 'Authorization': `Bearer ${props.token}`}      // envoi du jeton de l'utilisateur actuel
+      headers: { 'Authorization': `Bearer ${tokenPass}`}      // envoi du jeton de l'utilisateur actuel
     }
 
     axios.post(`http://localhost:4000/api/posts/${props.post.pt._id}/like`, requete, config)    // envoi au serveur Backend
@@ -185,8 +185,7 @@ export default function CardPost(props) {
       {(props.delPost  && (props.userId==props.post.pt.userId)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}
       {(props.modPost  && (props.userId==props.post.pt.userId)) && <button className='button--supp' onClick={() => modifyPost()}>M</button>}
       {props.modPost && onModify && <ModifyCardPost post={props.post.pt} titre={props.post.pt.name} 
-                                                    _id={props.post.pt._id} token={props.token}
-                                                    fnModPost={props.fnModPost}
+                                                    _id={props.post.pt._id} fnModPost={props.fnModPost}
                                                     fnModify={setOnmodify}/>}
     </div>
   )

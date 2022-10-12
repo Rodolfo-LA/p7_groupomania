@@ -1,10 +1,12 @@
-import {React, createContext, useState} from 'react'
+import {React} from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
 
+// Fonction poue la connexion au serveur Backend
+
 export default function Connexion() {
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Prépare la redirection vers le chemin post
 
   function sendInfos(e) {
     e.preventDefault()
@@ -17,13 +19,15 @@ export default function Connexion() {
     axios.post("http://localhost:4000/api/auth/login", requete)
       .then(function(value) {
         document.getElementById("reponse").textContent = value.data.userId;
-        navigate(`/env/${value.data.token}/${value.data.userId}`);
+        navigate('/post',{state : {userId:value.data.userId,token:value.data.token}})
       })
       .catch((err) => {
         console.log(err.response.data);
         document.getElementById("reponse").textContent = err.response.data.message;
     });
   }
+
+  // Génération du HTML
 
   return (
     <div>

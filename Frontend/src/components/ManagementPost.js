@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from "react-router-dom"
+import React, { createContext, useEffect, useState } from 'react'
+import { useLocation, useNavigate } from "react-router-dom"
 import CreatePost from './CreatePost'
 import DisplayAllPost from './DisplayAllPost'
 
-// Fonction gestion des posts
+export const contextToken = createContext();
+
+// Fonction pour la gestion des posts
 
 export default function ManagementPost() {
 
-  let { token, userId } = useParams();
+  const location = useLocation();
+  const token = location.state.token;     // récupération du token fourni par le backend
+  const userId = location.state.userId;   // récupération de l'Id de l'utilisateur courant
+
   let [ onCreate, setCreate ] = useState(false);    // appui
   let [ onModify, setModify ] = useState(false);    //appui
   let [ onSupp, setSupp ] = useState(false);    //appui
@@ -55,22 +60,21 @@ export default function ManagementPost() {
   useEffect(() => {maj()},[onPost]);
   
   return (
-    <div>
-      <h1>Connecté</h1>
-      <div className="options">
-        <button onClick={() => setCreate(!onCreate)}>Créer</button>
-        {onButtonModify ? <button onClick={() => Modify()}>Modifier</button>:<button className='button--off'>Modifier</button>}
-        {onButtonSupp ? <button onClick={() => Supp()}>Supprimer</button>:<button className='button--off'>Supprimer</button>}
-        <button onClick={retour}>Se déconnecter</button>
+      <div>
+        <h1>Connecté -- {userId} --</h1>
+            <div className="options">
+              <button onClick={() => setCreate(!onCreate)}>Créer</button>
+              {onButtonModify ? <button onClick={() => Modify()}>Modifier</button>:<button className='button--off'>Modifier</button>}
+              {onButtonSupp ? <button onClick={() => Supp()}>Supprimer</button>:<button className='button--off'>Supprimer</button>}
+              <button onClick={retour}>Se déconnecter</button>
+            </div>
+            {onSupp && <p className='infosupp'>Cliquez sur la croix (X) pour supprimer un post</p>}
+          <contextToken.Provider value={token}>  
+            {onCreate && <CreatePost majOnpost={setOnpost}/>} 
+            <DisplayAllPost userIdPass={userId} getPost={onGetpost}
+                            fnGetpost={setOngetpost} delPost={onSupp}
+                            modPost={onModify}/>
+           </contextToken.Provider>                   
       </div>
-      {onSupp && <p className='infosupp'>Cliquez sur la croix (X) pour supprimer un post</p>}
-      {onCreate && <CreatePost tokenPass={token} majOnpost={setOnpost}/>} 
-      <DisplayAllPost tokenPass={token}
-                      userIdPass={userId}
-                      getPost={onGetpost}
-                      fnGetpost={setOngetpost}
-                      delPost={onSupp}
-                      modPost={onModify}/>
-    </div>
   )
 }

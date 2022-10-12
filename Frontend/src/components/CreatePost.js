@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { contextToken } from './ManagementPost'
 
-export default function Connexion(props) {
+export default function CreatePost(props) {
+
+  const tokenPass = useContext(contextToken);   // récupération du token de l'utilisateur courant
 
   const navigate = useNavigate();  
   const [choixFichier, setChoixFichier] = useState();
@@ -24,7 +27,7 @@ export default function Connexion(props) {
     formD.append('name',e.target['titre'].value);
 
     const config = {     
-      headers: { 'Authorization': `Bearer ${props.tokenPass}`,
+      headers: { 'Authorization': `Bearer ${tokenPass}`,
                 'content-type': 'multipart/form-data' }
     }
 
@@ -36,12 +39,11 @@ export default function Connexion(props) {
         console.log(err);
         document.getElementById("postReponse").textContent = err;
     });
-
   }
 
   return (
     <div>
-    <h1>Créer un Post</h1>
+    <h1>Créer un Post - {tokenPass} -</h1>
     <form onSubmit={sendInfos}>
       <label>Entrer le titre du post</label>
       <input type="text" name="titre" defaultValue={''} />

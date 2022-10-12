@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import axios from 'axios'
+import {contextToken} from './ManagementPost'
+
 
 export default function ModifyCardPost(props) {
 
+  const tokenPass = useContext(contextToken);   // récupération du token de l'utilisateur courant
+  
   const [choixFichier, setChoixFichier] = useState();
   const [onSelectImg, setonSelectImg] = useState(false);
 
@@ -17,16 +21,16 @@ export default function ModifyCardPost(props) {
       requete.append('image',choixFichier );
       requete.append('name',e.target['titre'].value);
       config = {     
-        headers: { 'Authorization': `Bearer ${props.token}`,
+        headers: { 'Authorization': `Bearer ${tokenPass}`,
                   'content-type': 'multipart/form-data' }
       }
     }
     else {
       requete = {
-      "name": e.target['titre'].value    // envoi du nouveau titre
+      "name": e.target['titre'].value // envoi du nouveau titre
       }
       config = {     
-        headers: { 'Authorization': `Bearer ${props.token}`}      // envoi du jeton de l'utilisateur actuel
+        headers: { 'Authorization': `Bearer ${tokenPass}`}  // envoi du jeton de l'utilisateur actuel
       }
     }
 
