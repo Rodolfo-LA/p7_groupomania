@@ -57,7 +57,7 @@ export default function ModifyCardPost(props) {
         <input type="text" name="titre" defaultValue={props.titre}/>
         <label className='SelectFile'>
           <input type="file" name="imgUrl" onChange={selectFile} hidden/>
-          <i>Sélectionez votre fichier</i>
+          <i>Sélectionnez votre fichier</i>
         </label>
         {onSelectImg && <img src={URL.createObjectURL(choixFichier)} alt='selection'/>}
         <p>Attention cette action va supprimer<br></br>les commentaires et les like/dislike de ce post !</p>

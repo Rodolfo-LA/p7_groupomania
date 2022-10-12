@@ -9,10 +9,11 @@ export default function CreatePost(props) {
 
   const navigate = useNavigate();  
   const [choixFichier, setChoixFichier] = useState();
+  const [onSelectImg, setonSelectImg] = useState(false);
 
   function selectFile(event){
-      setChoixFichier(event.target.files[0]);
-      console.log(choixFichier);
+    setChoixFichier(event.target.files[0]);
+    setonSelectImg(true);
   }
 
   function retour() {
@@ -43,16 +44,17 @@ export default function CreatePost(props) {
 
   return (
     <div>
-    <h1>Créer un Post - {tokenPass} -</h1>
-    <form onSubmit={sendInfos}>
-      <label>Entrer le titre du post</label>
-      <input type="text" name="titre" defaultValue={''} />
-      <label>Ajouter votre image</label>
-      <input type="file" name="imgUrl" onChange={selectFile}/>
-      <label>Votre commentaire</label>
-      <input type="textarea" name="comment" defaultValue={''}/>
-      <button type="submit" id='postReponse'>Créer</button>
-    </form>
-  </div>
+      <h1>Créer un Post</h1>
+      <form onSubmit={sendInfos} className='createPost'>
+        <label>Entrer le titre du post</label>
+        <input type="text" name="titre" defaultValue={''} />
+        <label className='SelectFile'>
+          <input type="file" name="imgUrl" onChange={selectFile} hidden/>
+          <i>Sélectionnez votre fichier</i>
+        </label>
+        {onSelectImg && <img src={URL.createObjectURL(choixFichier)} alt='selection'/>}
+        <button type="submit" id='postReponse'>Créer</button>
+      </form>
+    </div>
   )
 }
