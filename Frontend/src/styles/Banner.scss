@@ -139,6 +139,24 @@ button {
   border-radius: 9px;
 }
 
+form {
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  background-color: $terColor;
+  font-family: Lato-med;
+  font-size: 130%;
+  color: white;
+  width: 37%;
+  margin: 9px auto;
+  padding: 9px;
+  border-radius: 12px;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.498);
+  & a {
+    color: white;
+  }
+}
+
 .createPost {
   display: flex;
   align-items: center;
