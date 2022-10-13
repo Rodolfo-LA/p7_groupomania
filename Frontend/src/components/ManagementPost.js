@@ -12,7 +12,8 @@ export default function ManagementPost() {
   const location = useLocation();
   const token = location.state.token;     // récupération du token fourni par le backend
   const userId = location.state.userId;   // récupération de l'Id de l'utilisateur courant
-
+  const admin = location.state.admin;     // récupération du status administrateur
+  
   let [ onCreate, setCreate ] = useState(false);    // appui
   let [ onModify, setModify ] = useState(false);    //appui
   let [ onSupp, setSupp ] = useState(false);    //appui
@@ -61,7 +62,7 @@ export default function ManagementPost() {
   
   return (
       <div>
-        <h1>Connecté -- {userId} --</h1>
+        <h1>Connecté -- {admin ? 'ADMINISTRATEUR':userId} --</h1>
             <div className="options">
               <button onClick={() => setCreate(!onCreate)}>Créer</button>
               {onButtonModify ? <button onClick={() => Modify()}>Modifier</button>:<button className='button--off'>Modifier</button>}

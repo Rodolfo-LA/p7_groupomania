@@ -155,11 +155,13 @@ export default function CardPost(props) {
     });
   }
 
+  let greyPost = props.modPost && (!onModify && (props.userId!=props.post.pt.userId))||(onModify && (props.userId==props.post.pt.userId));
+
   // Génération du code HTML
 
   return (
     <div className='cadre'>
-      <div className={(onModify && props.modPost) ? 'opaque':''}>
+      <div className={greyPost ? 'opaque':''}>
         <figure >
           <img src={props.post.pt.imageUrl} alt='ma photo' className={onModify? 'masq':null}/>     {/* alt à compléter */}
           <figcaption>{props.post.pt.name}</figcaption>
