@@ -1,6 +1,5 @@
 
 import logo from '../assets/icon-left-font.svg'
-import '../styles/Banner.scss'
 import React from 'react'
 
 export default function Banner() {

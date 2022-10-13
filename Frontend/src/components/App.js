@@ -1,5 +1,6 @@
 
 import { Routes, Route } from 'react-router-dom'
+import '../styles/Styles.scss'
 import Banner from './Banner'
 import Welcome from './Welcome'
 import Inscription from './Inscription'
