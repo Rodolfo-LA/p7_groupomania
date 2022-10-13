@@ -1,12 +1,13 @@
 import React, { useState, useContext } from 'react'
 import axios from 'axios'
-import {contextToken} from './ManagementPost'
+import {context} from './ManagementPost'
 
 
 export default function ModifyCardPost(props) {
 
-  const tokenPass = useContext(contextToken);   // récupération du token de l'utilisateur courant
-  
+  const tokenPass = useContext(context).token;   // récupération du token de l'utilisateur courant
+  const admin = useContext(context).admin;
+
   const [choixFichier, setChoixFichier] = useState();
   const [onSelectImg, setonSelectImg] = useState(false);
 
@@ -18,6 +19,7 @@ export default function ModifyCardPost(props) {
     if (onSelectImg) {
       setonSelectImg(false);
       requete = new FormData();
+      requete.append('isAdmin',admin);
       requete.append('image',choixFichier );
       requete.append('name',e.target['titre'].value);
       config = {     
@@ -27,7 +29,8 @@ export default function ModifyCardPost(props) {
     }
     else {
       requete = {
-      "name": e.target['titre'].value // envoi du nouveau titre
+        "isAdmin":admin,
+        "name": e.target['titre'].value // envoi du nouveau titre
       }
       config = {     
         headers: { 'Authorization': `Bearer ${tokenPass}`}  // envoi du jeton de l'utilisateur actuel

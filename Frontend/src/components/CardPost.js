@@ -3,12 +3,12 @@ import axios from 'axios'
 import logoLike from '../assets/logo_like.svg'
 import logoDislike from '../assets/logo_dislike.svg'
 import ModifyCardPost from './ModifyCardPost'
-import {contextToken} from './ManagementPost'
+import {context} from './ManagementPost'
 
 
 export default function CardPost(props) {
 
-  const tokenPass = useContext(contextToken);   // récupération du jeton de l'utilisateur courant
+  const tokenPass = useContext(context).token;   // récupération du jeton de l'utilisateur courant
 
   let [ onFirst, setOnfirst ] = useState(true);   // un seul appel à l'initialisation des boutons Like / Dislike
 

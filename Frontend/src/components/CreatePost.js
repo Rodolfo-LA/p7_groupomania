@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-import { contextToken } from './ManagementPost'
+import { context } from './ManagementPost'
 
 export default function CreatePost(props) {
 
-  const tokenPass = useContext(contextToken);   // récupération du token de l'utilisateur courant
+  const tokenPass = useContext(context).token;   // récupération du token de l'utilisateur courant
 
   const navigate = useNavigate();  
   const [choixFichier, setChoixFichier] = useState();

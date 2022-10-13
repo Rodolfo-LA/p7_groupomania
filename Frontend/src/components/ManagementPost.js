@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import CreatePost from './CreatePost'
 import DisplayAllPost from './DisplayAllPost'
 
-export const contextToken = createContext();
+export const context = createContext();
 
 // Fonction pour la gestion des posts
 
@@ -70,12 +70,12 @@ export default function ManagementPost() {
               <button onClick={retour}>Se déconnecter</button>
             </div>
             {onSupp && <p className='infosupp'>Cliquez sur la croix (X) pour supprimer un post</p>}
-          <contextToken.Provider value={token}>  
+          <context.Provider value={{token:token, admin:admin}}>  
             {onCreate && <CreatePost majOnpost={setOnpost}/>} 
             <DisplayAllPost userIdPass={userId} getPost={onGetpost}
                             fnGetpost={setOngetpost} delPost={onSupp}
                             modPost={onModify}/>
-           </contextToken.Provider>                   
+           </context.Provider>                   
       </div>
   )
 }

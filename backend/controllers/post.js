@@ -31,32 +31,39 @@ exports.createPost = (req, res, next) => {
 exports.modifyPost = (req, res, next) => {  
    Post.findOne({ _id: req.params.id })
       .then((post) => {
-         const postObject = JSON.parse(JSON.stringify(post));
-         if (req.body.newComment) {
-            postObject.comments.push(req.body.newComment);  //ajouter le nouveau commentaire
-         }
-         if (req.file) {
-            const filename = post.imageUrl.split('/images/')[1];  // supprimer l'ancien fichier
-            fs.unlink(`images/${filename}`, err => {
-               console.log('File deleted ! --> '+err);
-            });
-            postObject.imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
-         }
-         if (req.body.name) {
-            postObject.name = req.body.name;
-         }
-         delete postObject._id;
-         delete postObject._userId;
-         delete postObject.__v;
+         console.log(req.body.isAdmin ? 'ADMIN':'USER');
+         if ((post.userId != req.auth.userId) || (!req.body.isAdmin)) {
+            res.status(401).json({ message: 'Not authorized' });
+         } else {
+            const postObject = JSON.parse(JSON.stringify(post));
+            if (req.body.newComment) {
+               postObject.comments.push(req.body.newComment);  //ajouter le nouveau commentaire
+            }
+            if (req.file) {
+               const filename = post.imageUrl.split('/images/')[1];  // supprimer l'ancien fichier
+               fs.unlink(`images/${filename}`, err => {
+                  console.log('File deleted ! --> '+err);
+               });
+               postObject.imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+            }
+            if (req.body.name) {
+               postObject.name = req.body.name;
+            }
+            delete postObject._id;
+            delete postObject._userId;
+            delete postObject.__v;
 
-         console.log(req.params.id +" ---- "+postObject.name);
-         Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
-            .then(() => res.status(200).json({ message: 'modified post' }))
-            .catch(error => res.status(401).json({ error }));
-      })
+            console.log(req.params.id +" ---- "+postObject.name);
+            Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
+               .then(() => res.status(200).json({ message: 'modified post' }))
+               .catch(error => res.status(401).json({ error }));
+         }})
       .catch((error) => {
          res.status(400).json({ error });
       });
+
+
+
 };
 
 // Middleware pour effacer une post dans la base de donnée

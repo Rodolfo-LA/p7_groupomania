@@ -1,14 +1,16 @@
 import {useEffect, useState, useContext} from 'react'
 import axios from 'axios'
 import CardPost from './CardPost';
-import {contextToken} from './ManagementPost'
+import {context} from './ManagementPost'
 
 
 // Fonction pour afficher la liste des Posts
 
 export default function DisplayAllPost(props) {
 
-  const tokenPass = useContext(contextToken);   // récupération du jeton de l'utilisateur courant
+  const Context = useContext(context);   // récupération du jeton de l'utilisateur courant
+
+  const tokenPass = Context.token;
 
   let [tabPosts, updateTabPosts] = useState([]);        // Array qui contient les posts
   let [closePost, updateClosepost] = useState(false);   // Indique si un post à été supprimer
@@ -43,9 +45,8 @@ export default function DisplayAllPost(props) {
   return (
     <div className='dispo'>
       {tabPosts.map(pt =>(<CardPost key={pt._id} post={{pt}} userId={props.userIdPass}
-                                    token={tokenPass} delPost={props.delPost}
-                                    modPost={props.modPost} fnclosePost={updateClosepost}
-                                    fnModPost={updateModpost}                       
+                                    delPost={props.delPost} modPost={props.modPost}
+                                    fnclosePost={updateClosepost} fnModPost={updateModpost}                       
       />))}
   </div>
   )
