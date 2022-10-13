@@ -32,7 +32,7 @@ export default function Connexion() {
   return (
     <div>
       <h1>Connexion</h1>
-      <form onSubmit={sendInfos}>
+      <form onSubmit={sendInfos} className='formEntete'>
         <label>Votre e-mail</label>
         <input type="text" name="email" defaultValue={''} />
         <label>Votre mot de passe</label>

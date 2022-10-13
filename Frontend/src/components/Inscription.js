@@ -29,7 +29,7 @@ export default function Inscription() {
   return (
     <div>
       <h1>Inscription</h1>
-      <form onSubmit={sendInfos}>
+      <form onSubmit={sendInfos} className='formEntete' >
         <label>Entrez votre e-mail</label>
         <input type="text" name="email" defaultValue={'xxxxx@xxx.xx'} />
         <label>Entrez votre mot de passe</label>
