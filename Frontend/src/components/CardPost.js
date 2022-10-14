@@ -9,6 +9,7 @@ import {context} from './ManagementPost'
 export default function CardPost(props) {
 
   const tokenPass = useContext(context).token;   // récupération du jeton de l'utilisateur courant
+  const admin = useContext(context).admin;
 
   let [ onFirst, setOnfirst ] = useState(true);   // un seul appel à l'initialisation des boutons Like / Dislike
 
@@ -53,6 +54,7 @@ export default function CardPost(props) {
     e.preventDefault()
 
     let requete = {
+      "isAdmin":admin,
       "newComment": e.target['comment'].value    // envoi du nouveau commentaire
     }
 

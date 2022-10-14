@@ -26,15 +26,13 @@ exports.createPost = (req, res, next) => {
       .catch(error => res.status(400).json({ error }));
 };
 
-// Middleware pour modifier un commentaire dans un post de la base de donnée
+// Middleware pour modifier un post de la base de donnée
 
 exports.modifyPost = (req, res, next) => {  
    Post.findOne({ _id: req.params.id })
       .then((post) => {
-         console.log(req.body.isAdmin ? 'ADMIN':'USER');
-         if ((post.userId != req.auth.userId) || (!req.body.isAdmin)) {
-            res.status(401).json({ message: 'Not authorized' });
-         } else {
+         console.log(req.body.newComment ? 'vrai':'faux');
+         if ((req.body.newComment) || (post.userId === req.auth.userId) || (req.body.isAdmin)) {
             const postObject = JSON.parse(JSON.stringify(post));
             if (req.body.newComment) {
                postObject.comments.push(req.body.newComment);  //ajouter le nouveau commentaire
@@ -57,6 +55,8 @@ exports.modifyPost = (req, res, next) => {
             Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
                .then(() => res.status(200).json({ message: 'modified post' }))
                .catch(error => res.status(401).json({ error }));
+         } else {
+            res.status(401).json({ message: 'Not authorized' });
          }})
       .catch((error) => {
          res.status(400).json({ error });
