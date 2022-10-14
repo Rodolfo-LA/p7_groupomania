@@ -169,7 +169,7 @@ export default function CardPost(props) {
     <div className='cadre'>
       <div className={greyPost ? 'opaque':''}>
         <figure >
-          <img src={props.post.pt.imageUrl} alt='ma photo' className={onModify? 'masq':null}/>     {/* alt à compléter */}
+          <img src={props.post.pt.imageUrl} alt={props.post.pt.name} className={onModify? 'masq':null}/>     {/* alt à compléter */}
           <figcaption>{props.post.pt.name}</figcaption>
         </figure>
         <div className='like'>

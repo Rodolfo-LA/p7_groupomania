@@ -1,13 +1,11 @@
 import React, { useContext, useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
 import { context } from './ManagementPost'
 
 export default function CreatePost(props) {
 
   const tokenPass = useContext(context).token;   // récupération du token de l'utilisateur courant
 
-  const navigate = useNavigate();  
   const [choixFichier, setChoixFichier] = useState();
   const [onSelectImg, setonSelectImg] = useState(false);
 
@@ -50,7 +48,7 @@ export default function CreatePost(props) {
         <input type="text" name="titre" defaultValue={''} />
         <label className='SelectFile'>
           <input type="file" name="imgUrl" onChange={selectFile} hidden/>
-          <i>Sélectionnez votre fichier</i>
+          <i>Votre image</i>
         </label>
         {onSelectImg && <img src={URL.createObjectURL(choixFichier)} alt='selection'/>}
         <button type="submit" id='postReponse'>Créer</button>
