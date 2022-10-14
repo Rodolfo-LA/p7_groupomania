@@ -61,6 +61,7 @@ export default function ManagementPost() {
   useEffect(() => {maj()},[onPost]);
   
   return (
+    <React.StrictMode>
       <div>
         <h1>Connecté -- {admin ? 'ADMINISTRATEUR':userId} --</h1>
             <div className="options">
@@ -77,5 +78,6 @@ export default function ManagementPost() {
                             modPost={onModify}/>
            </context.Provider>                   
       </div>
+    </React.StrictMode>
   )
 }

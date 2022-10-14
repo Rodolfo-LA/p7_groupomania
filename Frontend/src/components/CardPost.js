@@ -90,13 +90,13 @@ export default function CardPost(props) {
   const tabLike = [];     // création de la ligne des LIKE
 
   for (let index = 0; index < nbLike; index++) {
-    tabLike.push(<img src={logoLike} alt='logo like' />);     // Génération du HTML
+    tabLike.push(<img  key={index} src={logoLike} alt='logo like' />);     // Génération du HTML
   }
 
   const tabdisLike = [];  // création de la ligne des DISLIKE
 
   for (let index = 0; index < nbDislike; index++) {
-    tabdisLike.push(<img src={logoDislike} alt='logo dislike' />);  // Génération du HTML
+    tabdisLike.push(<img key={index} src={logoDislike} alt='logo dislike' />);  // Génération du HTML
   }
 
   // Fonction pour gérer l'appui sur le bouton LIKE
@@ -187,7 +187,7 @@ export default function CardPost(props) {
             <textarea name="comment" rows="3" defaultValue={''} />
             <button type="submit">Poster</button>
           </form>}
-          {props.post.pt.comments.map(pt =>(<p>{pt}</p>))}
+          {props.post.pt.comments.map(pt =>(<p key={pt} >{pt}</p>))}
         </div>
       </div>
       {(props.delPost  && ((props.userId===props.post.pt.userId) || admin)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}
