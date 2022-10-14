@@ -187,11 +187,10 @@ export default function CardPost(props) {
           {props.post.pt.comments.map(pt =>(<p>{pt}</p>))}
         </div>
       </div>
-      {(props.delPost  && (props.userId==props.post.pt.userId)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}
-      {(props.modPost  && (props.userId==props.post.pt.userId)) && <button className='button--supp' onClick={() => modifyPost()}>M</button>}
-      {props.modPost && onModify && <ModifyCardPost post={props.post.pt} titre={props.post.pt.name} 
-                                                    _id={props.post.pt._id} fnModPost={props.fnModPost}
-                                                    fnModify={setOnmodify}/>}
+      {(props.delPost  && ((props.userId===props.post.pt.userId) || admin)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}
+      {(props.modPost  && ((props.userId===props.post.pt.userId) || admin)) && <button className='button--supp' onClick={() => modifyPost()}>M</button>}
+      {props.modPost && onModify && <ModifyCardPost post={props.post.pt} titre={props.post.pt.name} _id={props.post.pt._id}
+                                                    fnModPost={props.fnModPost} fnModify={setOnmodify}/>}
     </div>
   )
 }
