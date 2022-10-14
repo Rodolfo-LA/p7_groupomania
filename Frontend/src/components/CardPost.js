@@ -157,8 +157,11 @@ export default function CardPost(props) {
     });
   }
 
-  let greyPost = props.modPost && (!onModify && (props.userId!=props.post.pt.userId))||(onModify && (props.userId==props.post.pt.userId));
-  greyPost = (greyPost || (props.delPost  && (props.userId!=props.post.pt.userId)));
+  // Condition pour griser un Post.
+
+  let greyPost = (((props.modPost) && ((!onModify) && (props.userId!==props.post.pt.userId)))
+                                   || ((onModify) && (props.userId===props.post.pt.userId))
+                                   || (props.delPost && (props.userId!==props.post.pt.userId)));
 
   // Génération du code HTML
 
