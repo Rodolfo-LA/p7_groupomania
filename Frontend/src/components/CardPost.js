@@ -76,11 +76,11 @@ export default function CardPost(props) {
 // Initialisation au premier appel de l'état des boutons LIKE /DISLIKE
 
   if (onFirst) {                                        
-    if (props.post.pt.usersLiked.includes(props.post.pt.userId)) {
+    if (props.post.pt.usersLiked.includes(props.userId)) {
       setOnlike(true);
       setOnbuttondislike(false);
     }
-    if (props.post.pt.usersDisliked.includes(props.post.pt.userId)) {
+    if (props.post.pt.usersDisliked.includes(props.userId)) {
       setOndislike(true);
       setOnbuttonlike(false);
     }
