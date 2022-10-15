@@ -15,7 +15,7 @@ export default function CreatePost(props) {
   }
 
   function retour() {
-    props.majOnpost(true);
+    props.fnNewpost(true);
   }
 
   function sendInfos(e) {

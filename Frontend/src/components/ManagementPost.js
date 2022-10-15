@@ -21,8 +21,7 @@ export default function ManagementPost() {
   let [ onButtonSupp, setOnbuttonSupp ] = useState(true);    // visible
   let [ onButtonModify, setOnbuttonModify ] = useState(true);    // visible
   
-  let [onPost, setOnpost] = useState(false);
-  let [onGetpost, setOngetpost] = useState(true);
+  let [newPost, setNewpost] = useState(false);    // Un nouveau post est créé
   
   const navigate = useNavigate();
 
@@ -54,11 +53,10 @@ export default function ManagementPost() {
 
   function maj(){
     setCreate(false);
-    setOnpost(false);
-    setOngetpost(true);
+    setNewpost(false);
   }
 
-  useEffect(() => {maj()},[onPost]);
+  useEffect(() => {maj()},[newPost]);
   
   return (
     <React.StrictMode>
@@ -72,10 +70,8 @@ export default function ManagementPost() {
             </div>
             {onSupp && <p className='infosupp'>Cliquez sur la croix (X) pour supprimer un post</p>}
           <context.Provider value={{token:token, admin:admin}}>  
-            {onCreate && <CreatePost majOnpost={setOnpost}/>} 
-            <DisplayAllPost userIdPass={userId} getPost={onGetpost}
-                            fnGetpost={setOngetpost} delPost={onSupp}
-                            modPost={onModify}/>
+            {onCreate && <CreatePost fnNewpost={setNewpost}/>} 
+            <DisplayAllPost userIdPass={userId} newPost={newPost} delPost={onSupp} modPost={onModify}/>
            </context.Provider>                   
       </div>
     </React.StrictMode>

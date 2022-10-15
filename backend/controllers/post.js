@@ -71,16 +71,17 @@ exports.modifyPost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
    Post.findOne({ _id: req.params.id })
       .then(post => {
-         if (post.userId != req.auth.userId) {
-            res.status(401).json({ message: 'Not authorized' });
-         } else {
+         console.log(req.body.isAdmin ? 'ADMIN':'USER');
+         if ((post.userId === req.auth.userId) || (req.body.isAdmin)) {
             const filename = post.imageUrl.split('/images/')[1];
             // suppression asynchrone du fichier physiquement sur le disque
             fs.unlink(`images/${filename}`, () => {
                Post.deleteOne({ _id: req.params.id }) // suppression dans la base de données
                   .then(() => { res.status(200).json({ message: 'post removed' }) })
                   .catch(error => res.status(401).json({ error }));
-            });
+            });  
+         } else {
+            res.status(401).json({ message: 'Not authorized' });
          }
       })
       .catch(error => {

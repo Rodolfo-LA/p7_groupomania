@@ -36,7 +36,8 @@ export default function CardPost(props) {
   function deletePost() {
 
     const config = {     
-      headers: { 'Authorization': `Bearer ${tokenPass}`}      // envoi du jeton de l'utilisateur actuel
+      headers: { 'Authorization': `Bearer ${tokenPass}`},      // envoi du jeton de l'utilisateur actuel
+      data: {"isAdmin":admin}
     }
 
     axios.delete(`http://localhost:4000/api/posts/${props.post.pt._id}`, config)    // envoi au serveur Backend

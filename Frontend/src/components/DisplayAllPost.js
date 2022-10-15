@@ -3,28 +3,33 @@ import axios from 'axios'
 import CardPost from './CardPost';
 import {context} from './ManagementPost'
 
-
 // Fonction pour afficher la liste des Posts
 
 export default function DisplayAllPost(props) {
 
   const Context = useContext(context);   // récupération du jeton de l'utilisateur courant
-
   const tokenPass = Context.token;
 
   let [tabPosts, updateTabPosts] = useState([]);        // Array qui contient les posts
   let [closePost, updateClosepost] = useState(false);   // Indique si un post à été supprimer
   let [modPost, updateModpost] = useState(false);       // Indique si un post à été modifier
   
+  let [refreshPost, updateRefreshPost] = useState(true);
+
   function EndModPost() {
-    props.fnGetpost(true);
+    updateRefreshPost(true);
     updateModpost(false);
   }
 
-  useEffect(() => {props.fnGetpost(true);},[closePost]);    // Si un post est éffacé la liste est mise a jour
-  useEffect(EndModPost,[modPost]);                          // Si un post est modifié la liste est mise a jour
+  function EndClosePost() {
+    updateRefreshPost(true);
+    updateClosepost(false);
+  }
 
-  if (props.getPost) {
+  useEffect(EndClosePost,[closePost]);    // Si un post est éffacé la liste est mise a jour
+  useEffect(EndModPost,[modPost]);        // Si un post est modifié la liste est mise a jour
+
+  if (refreshPost || props.newPost) {
     const config = {     
       headers: { 'Authorization': `Bearer ${tokenPass}`,    // transmission du jeton au serveur
                 'content-type': 'multipart/form-data' }
@@ -33,7 +38,7 @@ export default function DisplayAllPost(props) {
     .then(function(value) {
       value.data.reverse();                             // Inversion de la présentation des posts
       updateTabPosts(x => Object.values(value.data));   // Copie du tableau provenant du serveur
-      props.fnGetpost(false);
+      updateRefreshPost(false);
     })
     .catch((err) => {
       console.log(err);
@@ -50,4 +55,4 @@ export default function DisplayAllPost(props) {
       />))}
   </div>
   )
-}
+} 
