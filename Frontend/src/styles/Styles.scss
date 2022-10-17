@@ -157,6 +157,11 @@ button {
   & a {
     color: white;
   }
+  & p {
+    font-family: Lato-med;
+    margin-top: 0px;
+    color: $secColor;
+  }
 }
 
 .createPost {

@@ -36,10 +36,13 @@ export default function Connexion() {
       <h1>Connexion</h1>
       <form onSubmit={sendInfos} className='formEntete'>
         <label>Votre e-mail</label>
-        <input type="text" name="email" defaultValue={''} />
+        <input type="text" name="email" defaultValue={''} required />
+        <p></p>
         <label>Votre mot de passe</label>
-        <input type="text" name="password" defaultValue={''}/>
-        <button type="submit" id='reponse'>S'indentifier</button>
+        <input type="password" name="password" defaultValue={''} required/>
+
+        <button type="submit">S'indentifier</button>
+        <p id='reponse'></p>
         <Link to="/">Annuler</Link>
       </form>
     </div>
