@@ -18,12 +18,15 @@ Project 7 Openclassrooms
 * Installation du site:
 
   - installer au préalable Node.js sur votre machine.
+  - Lancer un node.js command prompt:
+      -> exécuter la commande: npm install -g nodemon
+
   - Cloner le dépôt github sur votre machine:
       https://github.com/Rodolfo-LA/p7_groupomania.git
+      
 
 * Lancer l'application:
 
-  - Lancer un node.js command prompt:
     - Aller dans le dossier backend du dépôt cloné.
         -> exécuter la commande: nodemon server
     - Aller dans le dossier frontend du dépôt cloné.
