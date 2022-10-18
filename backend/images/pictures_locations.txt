@@ -1,0 +1,1 @@
+Emplacement pour les images provenant du Frontend.
