@@ -30,6 +30,10 @@ body {
   to {rotate: 360deg;}
 }
 
+.ground {
+  background-color: $secColor;
+}
+
 .symbole {  
   display: block;
   margin: auto;
@@ -159,6 +163,7 @@ button {
   }
   & p {
     font-family: Lato-med;
+    text-align: center;
     margin-top: 0px;
     color: $secColor;
   }
@@ -169,16 +174,16 @@ button {
   align-items: center;
   flex-flow: column;
   background-color: $terColor;
-  font-family: Lato;
+  font-family: Lato-med;
   font-size: 130%;
   color: white;
-  width: 786px;
+  width: 333px;
   margin: 9px auto;
   padding: 9px;
   border-radius: 12px;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.498);
   & img {
-    margin-top: 16px;
+    margin-bottom: 9px;
     width: 67%;
     border-radius: 9px;
   }
@@ -192,9 +197,11 @@ button {
   }
   & i {
     display: block;
-    margin-top: 20px;
-    padding: 9px 15px;
-    font-size: 80%;
+    margin: 9px auto;
+    padding: 3px  9px;
+    width: 150px;
+    font-size: 100%;
+    text-align: center;
     background-color: $priColor;
     border-radius: 9px;
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.498);

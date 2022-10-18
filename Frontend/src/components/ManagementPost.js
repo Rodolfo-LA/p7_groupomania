@@ -60,7 +60,7 @@ export default function ManagementPost() {
   
   return (
     <React.StrictMode>
-      <div>
+      <div className='ground'>
         <h1>Connecté -- {admin ? 'ADMINISTRATEUR':userId} --</h1>
             <div className="options">
               <button onClick={() => setCreate(!onCreate)}>Créer</button>
