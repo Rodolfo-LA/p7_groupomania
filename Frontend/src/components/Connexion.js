@@ -8,6 +8,10 @@ export default function Connexion() {
 
   const navigate = useNavigate(); // Prépare la redirection vers le chemin post
 
+  function cancelErr() {
+    document.getElementById("reponse").textContent = "";
+  }
+
   function sendInfos(e) {
     e.preventDefault()
   
@@ -36,11 +40,9 @@ export default function Connexion() {
       <h1>Connexion</h1>
       <form onSubmit={sendInfos} className='formEntete'>
         <label>Votre e-mail</label>
-        <input type="text" name="email" defaultValue={''} required />
-        <p></p>
+        <input type="text" name="email" defaultValue={''} onChange={cancelErr} required />
         <label>Votre mot de passe</label>
-        <input type="password" name="password" defaultValue={''} required/>
-
+        <input type="password" name="password" defaultValue={''} onChange={cancelErr} required/>
         <button type="submit">S'indentifier</button>
         <p id='reponse'></p>
         <Link to="/">Annuler</Link>
