@@ -357,7 +357,7 @@ figure {
   }
   & form textarea{
     position: relative;
-    left: -24px;
+    left: -3%;
     font-family: Lato-med;
     font-size: 150%;
     margin-bottom: 12px;
@@ -373,7 +373,7 @@ figure {
   & form button {
     position: relative;
     top: -38px;
-    left: 63%;
+    left: 65%;
     margin: 0px;
     font-size: 75%;
   }
@@ -409,6 +409,9 @@ figure {
     scale: 90%;
     top: -4px;
     left: -4px;
+  }
+  .cadre-comment p {
+    width: 80%;
   }
 
 }
