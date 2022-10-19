@@ -36,7 +36,7 @@ export default function Connexion() {
   // Génération du HTML
 
   return (
-    <div>
+    <div className='ground'>
       <h1>Connexion</h1>
       <form onSubmit={sendInfos} className='formEntete'>
         <label>Votre e-mail</label>

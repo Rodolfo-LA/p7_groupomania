@@ -47,7 +47,7 @@ export default function Inscription() {
   // Génération du HTML
 
   return (
-    <div>
+    <div className='ground'>
       <h1>Inscription</h1>
       <form onSubmit={sendInfos} className='formEntete' >
         <label>Entrez votre e-mail</label>

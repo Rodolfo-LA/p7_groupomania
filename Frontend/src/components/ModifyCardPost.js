@@ -63,7 +63,6 @@ export default function ModifyCardPost(props) {
           <i>Votre nouvelle image</i>
         </label>
         {onSelectImg && <img src={URL.createObjectURL(choixFichier)} alt='selection'/>}
-        <p>Attention cette action va supprimer<br></br>les commentaires et les like/dislike de ce post !</p>
         <button type="submit" id='postReponse'>Modifier</button>
       </form> 
     </div>
