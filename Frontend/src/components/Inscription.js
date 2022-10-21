@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from "react-router-dom"
 
@@ -19,6 +19,7 @@ export default function Inscription() {
   function sendInfos(e) {     // Envoi des données sur le serveur si le mot de passe & email ok
     e.preventDefault()
 
+    // eslint-disable-next-line
     let regOk= new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/); // Nouvelle règle REGEX pour l'email
 
     if (!regOk.test(e.target['email'].value)) {
