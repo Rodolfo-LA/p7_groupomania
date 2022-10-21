@@ -39,7 +39,13 @@ export default function Inscription() {
           Navigate(`/con`);
         })
         .catch((err) => {
-          document.getElementById("repPass").textContent = err.response.data.message;
+          if(err.response.data.message === "Renforcez votre mot de passe !") {
+            document.getElementById("repPass").textContent = err.response.data.message; 
+          }
+          else {
+            document.getElementById("repEmail").textContent = "Cet e-mail est déja enregistré !";
+          }
+          
       });
     }
   }

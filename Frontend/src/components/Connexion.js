@@ -2,7 +2,7 @@ import {React} from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
 
-// Fonction poue la connexion au serveur Backend
+// Fonction pour la connexion au serveur Backend
 
 export default function Connexion() {
 
