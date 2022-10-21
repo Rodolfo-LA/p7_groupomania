@@ -396,6 +396,28 @@ figure {
   margin: 6px auto;
 }
 
+.alerte {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & h1 {
+    width: 100%;
+  }
+  & p {
+    margin: 12% auto;
+    text-align: center;
+    font-size: 200%;
+  }
+  & a {
+  color: white;
+  background-color: $terColor;
+  padding: 9px;
+  text-decoration: none;
+  border-radius: 9px;
+  margin-bottom: 12%;
+  }
+}
+
 // Media queries
 
 @media only screen and (max-width: 700px) {
@@ -422,5 +444,4 @@ figure {
   body {
     width: 900px;
   }
-
 }
