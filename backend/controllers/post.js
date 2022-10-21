@@ -20,7 +20,6 @@ exports.createPost = (req, res, next) => {
       usersLiked: [],
       usersDisliked: []
    });
-   //console.log(post);
    post.save()
       .then(() => res.status(201).json({ message: 'recorded post !' }))
       .catch(error => res.status(400).json({ error }));
@@ -61,9 +60,6 @@ exports.modifyPost = (req, res, next) => {
       .catch((error) => {
          res.status(400).json({ error });
       });
-
-
-
 };
 
 // Middleware pour effacer une post dans la base de donnée
@@ -89,14 +85,6 @@ exports.deletePost = (req, res, next) => {
       });
 };
 
-// Middleware pour la récupération d'une post par son id
-
-exports.getOnePost = (req, res, next) => {
-   Post.findOne({ _id: req.params.id })
-      .then(post => res.status(200).json(post))
-      .catch(error => res.status(404).json({ error }));
-};
-
 // Middleware pour la récupération de toutes les posts
 
 exports.getAllPosts = (req, res, next) => {
@@ -112,7 +100,7 @@ exports.likePost = (req, res, next) => {
       .then(post => {
          // traitement like
          switch (req.body.like) {
-            case 0:
+            case 0:     // annule le like/dislike précédent
                let pos = post.usersLiked.indexOf(req.auth.userId);
                if (pos != -1) {
                   post.usersLiked.splice(pos, 1);
@@ -123,12 +111,12 @@ exports.likePost = (req, res, next) => {
                   post.dislikes--;
                }
                break;
-            case 1:
+            case 1:     // ajoute un like
                post.likes++;
                // ajout userId au tab usersLiked
                post.usersLiked.push(req.auth.userId);
                break;
-            case -1:
+            case -1:    // ajoute un dislike
                post.dislikes++;
                // ajout userId au tab usersDisliked
                post.usersDisliked.push(req.auth.userId);
