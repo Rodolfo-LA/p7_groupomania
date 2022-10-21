@@ -78,7 +78,8 @@ export default function ManagementPost() {
               {onButtonSupp ? <button onClick={() => Supp()}>Supprimer</button>:<button className='button--off'>Supprimer</button>}
               <button onClick={retour}>Se déconnecter</button>
             </div>
-            {onSupp && <p className='infosupp'>Cliquez sur la croix (X) pour supprimer un post</p>}
+            {onSupp && <p className='infosupp'>Cliquez sur la croix (X) pour supprimer un post !! ATTENTION SUPPRESSION DÉFINITIVE !!</p>}
+            {onModify && <p className='infosupp'>Cliquez sur le bouton (M) pour modifier un post</p>}
           <context.Provider value={{token:token, admin:admin}}>  
             {onCreate && <CreatePost fnNewpost={setNewpost}/>} 
             <DisplayAllPost userIdPass={userId} newPost={newPost} delPost={onSupp} modPost={onModify}/>
