@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import symbole from '../assets/symbole_groupomania.svg'
 
-// Fonction page d'accueil
+// Fonction pour la page d'accueil
 
 export default function Welcome() {
   return (
@@ -11,7 +11,7 @@ export default function Welcome() {
           <Link to="/ins">Inscrivez-vous</Link>
           <Link to="/con">connectez-vous</Link>
         </nav>
-        <img src={symbole} alt=' groupomania' className='symbole'/>
+        <img src={symbole} alt='logo animé groupomania' className='symbole'/>
     </div>
   )
 }

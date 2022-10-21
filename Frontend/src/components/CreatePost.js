@@ -19,6 +19,8 @@ export default function CreatePost(props) {
     props.fnNewpost(true);
   }
 
+  // Fonction pour envoyer les informations du nouveau post au serveur backend
+
   function sendInfos(e) {
     e.preventDefault();
 
@@ -49,6 +51,8 @@ export default function CreatePost(props) {
 
   }
 
+  // Génération du HTML
+
   return (
     <div>
       <h1>Créer un Post</h1>
@@ -60,7 +64,7 @@ export default function CreatePost(props) {
           <i>Votre image</i>
           <p id='reponse'></p>
         </label>
-        {onSelectImg && <img src={URL.createObjectURL(choixFichier)} alt='selection'/>}
+        {onSelectImg && <img src={URL.createObjectURL(choixFichier)} alt='selection du fichier'/>}
         <button type="submit">Créer</button>
       </form>
     </div>

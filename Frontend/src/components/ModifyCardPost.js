@@ -2,17 +2,20 @@ import React, { useState, useContext } from 'react'
 import axios from 'axios'
 import {context} from './ManagementPost'
 
+// Fonction pour modifier un post
 
 export default function ModifyCardPost(props) {
 
   const tokenPass = useContext(context).token;   // récupération du token de l'utilisateur courant
-  const admin = useContext(context).admin;
+  const admin = useContext(context).admin;       // et de sa valeur admin
 
   const [choixFichier, setChoixFichier] = useState();
-  const [onSelectImg, setonSelectImg] = useState(false);
+  const [onSelectImg, setonSelectImg] = useState(false);    // état du choix d'un fichier sélectionné
 
   let requete = {};
   let config = {};
+
+  // Fonction pour envoyer les données modifiées d'un post
 
   function sendInfos(e) {
     e.preventDefault()
@@ -48,10 +51,14 @@ export default function ModifyCardPost(props) {
     });
   }
 
+  // Fonction pour récupérer le fichier image sélectionné
+
   function selectFile(event){
     setChoixFichier(event.target.files[0]);
     setonSelectImg(true);
   }
+
+  // Génération du HTML
 
   return (
     <div >

@@ -6,6 +6,8 @@ import ModifyCardPost from './ModifyCardPost'
 import {context} from './ManagementPost'
 
 
+// Fonction pour afficher et gérer un post
+
 export default function CardPost(props) {
 
   const tokenPass = useContext(context).token;   // récupération du jeton de l'utilisateur courant
@@ -25,7 +27,7 @@ export default function CardPost(props) {
   let [ nbLike, setNblike ] = useState(props.post.pt.likes);            // nombre de like du post
   let [ nbDislike, setNbdislike ] = useState(props.post.pt.dislikes);   // nombre de dislike du post
 
-  // fonction pour effacer un Post
+  // fonction pour inverser l'affichage de modification du post
 
   function modifyPost() {
     setOnmodify(!onModify);
@@ -136,7 +138,7 @@ export default function CardPost(props) {
 
   // fonction pour la mise à jour du système de Like / Dislike
   //
-  // codeLike : code a transmettre au serveur
+  // codeLike : code a transmettre au serveur 0: annulation du dernier état / 1: like / -1:dislike
   //
 
   function majLike(codeLike) {
@@ -170,7 +172,7 @@ export default function CardPost(props) {
     <div className='cadre'>
       <div className={greyPost ? 'opaque':''}>
         <figure >
-          <img src={props.post.pt.imageUrl} alt={props.post.pt.name} className={onModify? 'masq':null}/>     {/* alt à compléter */}
+          <img src={props.post.pt.imageUrl} alt={props.post.pt.name} className={onModify? 'masq':null}/>
           <figcaption>{props.post.pt.name}</figcaption>
         </figure>
         <div className='like'>

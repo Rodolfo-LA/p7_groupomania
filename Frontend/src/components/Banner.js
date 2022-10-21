@@ -2,6 +2,8 @@
 import logo from '../assets/icon-left-font.svg'
 import React from 'react'
 
+// Fonction qui affiche l'entête de la page
+
 export default function Banner() {
     return (
       <div>

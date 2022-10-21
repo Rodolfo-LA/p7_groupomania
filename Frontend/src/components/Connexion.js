@@ -8,9 +8,13 @@ export default function Connexion() {
 
   const navigate = useNavigate(); // Prépare la redirection vers le chemin post
 
+  // Fonction pour annuler le message d'erreur
+
   function cancelErr() {
     document.getElementById("reponse").textContent = "";
   }
+
+  // Fonction pour envoyer au serveur backend les infos de connexion
 
   function sendInfos(e) {
     e.preventDefault()

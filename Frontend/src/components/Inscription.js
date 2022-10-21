@@ -8,8 +8,6 @@ export default function Inscription() {
 
   const Navigate = useNavigate();
 
-  //let [newEmail, setNewemail] = useState("xxx@xx.xx");
-
   function ctrlEmail() {    // Remise à zero du message d'erreur pour le email
     document.getElementById("repEmail").textContent = '';
   }

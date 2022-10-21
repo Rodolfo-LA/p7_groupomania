@@ -14,12 +14,16 @@ export default function DisplayAllPost(props) {
   let [closePost, updateClosepost] = useState(false);   // Indique si un post à été supprimer
   let [modPost, updateModpost] = useState(false);       // Indique si un post à été modifier
   
-  let [refreshPost, updateRefreshPost] = useState(true);
+  let [refreshPost, updateRefreshPost] = useState(true); // Indique si la liste des post doit-être rafraîchie
+
+  // Fonction pour indiquer la fin de la modification d'un post
 
   function EndModPost() {
     updateRefreshPost(true);
     updateModpost(false);
   }
+
+  // Fonction pour indiquer la suppression d'un post)
 
   function EndClosePost() {
     updateRefreshPost(true);
