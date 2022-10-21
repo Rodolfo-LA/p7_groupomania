@@ -38,7 +38,6 @@ exports.signup = (req, res, next) => {
    else {
       // le mot de passe n'est pas assez robuste
       res.status(400).json({ message: 'Renforcez votre mot de passe !' });
-      console.log(req.body);
    }
  };
 

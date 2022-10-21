@@ -5,10 +5,6 @@ const fs = require('fs');     // module pour la gestion des fichiers locaux
 // Middleware pour créer une post dans la base de donnée
 
 exports.createPost = (req, res, next) => {
-
-   console.log(req.get('host'));
-   console.log(req.file.filename);
-
    const post = new Post({
       ...req.body,
       userId: req.auth.userId,
@@ -30,7 +26,6 @@ exports.createPost = (req, res, next) => {
 exports.modifyPost = (req, res, next) => {  
    Post.findOne({ _id: req.params.id })
       .then((post) => {
-         console.log(req.body.newComment ? 'vrai':'faux');
          if ((req.body.newComment) || (post.userId === req.auth.userId) || (req.body.isAdmin)) {
             const postObject = JSON.parse(JSON.stringify(post));
             if (req.body.newComment) {
@@ -49,8 +44,6 @@ exports.modifyPost = (req, res, next) => {
             delete postObject._id;
             delete postObject._userId;
             delete postObject.__v;
-
-            console.log(req.params.id +" ---- "+postObject.name);
             Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
                .then(() => res.status(200).json({ message: 'modified post' }))
                .catch(error => res.status(401).json({ error }));
@@ -67,7 +60,6 @@ exports.modifyPost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
    Post.findOne({ _id: req.params.id })
       .then(post => {
-         console.log(req.body.isAdmin ? 'ADMIN':'USER');
          if ((post.userId === req.auth.userId) || (req.body.isAdmin)) {
             const filename = post.imageUrl.split('/images/')[1];
             // suppression asynchrone du fichier physiquement sur le disque
