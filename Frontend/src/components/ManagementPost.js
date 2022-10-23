@@ -13,7 +13,7 @@ export default function ManagementPost() {
   const token = location.state.token;     // récupération du token fourni par le backend
   const userId = location.state.userId;   // récupération de l'Id de l'utilisateur courant
   const admin = location.state.admin;     // récupération du status administrateur
-  const pseudo = 'BougreBG';
+  const pseudo = location.state.pseudo;   // récupération du pseudo
   
   let [ onCreate, setCreate ] = useState(false);    // état du bouton CREER
   let [ onModify, setModify ] = useState(false);    // état du bouton MODIFIER
@@ -72,7 +72,7 @@ export default function ManagementPost() {
   return (
     <React.StrictMode>
       <div className='ground'>
-        <h1>Connecté -- {admin ? 'ADMINISTRATEUR':'UTILISATEUR'} --</h1>
+        <h1>Connecté -- {admin ? 'ADMINISTRATEUR':pseudo} --</h1>
             <div className="options">
               <button onClick={() => setCreate(!onCreate)}>Créer</button>
               {onButtonModify ? <button onClick={() => Modify()}>Modifier</button>:<button className='button--off'>Modifier</button>}
