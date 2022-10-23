@@ -29,7 +29,8 @@ export default function Connexion() {
         document.getElementById("reponse").textContent = value.data.userId;
         navigate('/post',{state : {userId:value.data.userId,
                                    token:value.data.token,
-                                   admin:value.data.admin}})
+                                   admin:value.data.admin,
+                                   pseudo:value.data.pseudo}})
       })
       .catch((err) => {
         console.log(err.response.data);

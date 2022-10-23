@@ -13,6 +13,7 @@ export default function ManagementPost() {
   const token = location.state.token;     // récupération du token fourni par le backend
   const userId = location.state.userId;   // récupération de l'Id de l'utilisateur courant
   const admin = location.state.admin;     // récupération du status administrateur
+  const pseudo = 'BougreBG';
   
   let [ onCreate, setCreate ] = useState(false);    // état du bouton CREER
   let [ onModify, setModify ] = useState(false);    // état du bouton MODIFIER
@@ -80,7 +81,7 @@ export default function ManagementPost() {
             </div>
             {onSupp && <p className='infosupp'>Cliquez sur la croix (X) pour supprimer un post !! ATTENTION SUPPRESSION DÉFINITIVE !!</p>}
             {onModify && <p className='infosupp'>Cliquez sur le bouton (M) pour modifier un post</p>}
-          <context.Provider value={{token:token, admin:admin}}>  
+          <context.Provider value={{token:token, admin:admin,pseudo:pseudo}}>  
             {onCreate && <CreatePost fnNewpost={setNewpost}/>} 
             <DisplayAllPost userIdPass={userId} newPost={newPost} delPost={onSupp} modPost={onModify}/>
            </context.Provider>                   

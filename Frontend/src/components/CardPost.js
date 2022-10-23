@@ -12,6 +12,7 @@ export default function CardPost(props) {
 
   const tokenPass = useContext(context).token;   // récupération du jeton de l'utilisateur courant
   const admin = useContext(context).admin;
+  const pseudo = useContext(context).pseudo;
 
   let [ onFirst, setOnfirst ] = useState(true);   // un seul appel à l'initialisation des boutons Like / Dislike
 
@@ -187,10 +188,10 @@ export default function CardPost(props) {
         <div className='cadre-comment'>
           {onComment && 
           <form onSubmit={sendInfos}>
-            <textarea name="comment" rows="3" defaultValue={''} minlength="10" maxLength="120" required/>
+            <textarea name="comment" rows="3" defaultValue={''} minlength="6" maxLength="120" required/>
             <button type="submit">Poster</button>
           </form>}
-          {props.post.pt.comments.map(pt =>(<p key={pt} >{pt}</p>))}
+          {props.post.pt.comments.map(pt =>(<p key={pt}><p className='pseudo'>{pseudo}</p>{pt}</p>))}
         </div>
       </div>
       {(props.delPost  && ((props.userId===props.post.pt.userId) || admin)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}

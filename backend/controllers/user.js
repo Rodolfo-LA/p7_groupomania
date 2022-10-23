@@ -27,7 +27,8 @@ exports.signup = (req, res, next) => {
         const user = new User({
           email: req.body.email,
           password: hash,
-          admin: false
+          admin: false,
+          pseudo: 'Lebougre'
         });
         user.save()     // promise : enregistrement dans la base.
           .then(() => res.status(201).json({ message: 'Utilisateur enregistré' }))
