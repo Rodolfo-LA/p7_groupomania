@@ -16,6 +16,10 @@ export default function Inscription() {
     document.getElementById("repPass").textContent = '';
   }
 
+  function ctrlPseudo() {     // Remise à zero du message d'erreur pour le pseudo
+    document.getElementById("repPseudo").textContent = '';
+  }
+
   function sendInfos(e) {     // Envoi des données sur le serveur si le mot de passe & email ok
     e.preventDefault()
 
@@ -28,7 +32,8 @@ export default function Inscription() {
     else {
       let requete = {
         "email": e.target['email'].value,
-        "password": e.target['password'].value
+        "password": e.target['password'].value,
+        "pseudo": e.target['pseudo'].value
       };
       
       axios.post("http://localhost:4000/api/auth/signup", requete)
@@ -56,11 +61,14 @@ export default function Inscription() {
       <h1>Inscription</h1>
       <form onSubmit={sendInfos} className='formEntete' >
         <label>Entrez votre e-mail</label>
-        <input type="text" name="email" placeholder='xxx@xx.xx' onChange={ctrlEmail} required />
+        <input type="email" name="email" placeholder='xxx@xx.xx' onChange={ctrlEmail} required />
         <p id='repEmail'></p>
         <label>Entrez votre mot de passe</label>
         <input type="password" name="password" onChange={ctrlPass} required/>
         <p id='repPass'></p>
+        <label>Entrez votre pseudonyme</label>
+        <input type="text" name="pseudo" minlength="3" maxlength="9" onChange={ctrlPseudo} required/>
+        <p id='repPseudo'></p>
         <button type="submit">Validez</button>
         <Link to="/">Annuler</Link>    
       </form>
