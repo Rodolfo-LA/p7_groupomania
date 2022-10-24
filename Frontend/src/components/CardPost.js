@@ -59,7 +59,7 @@ export default function CardPost(props) {
 
     let requete = {
       "isAdmin":admin,
-      "newComment": e.target['comment'].value    // envoi du nouveau commentaire
+      "newComment": pseudo +'/§/'+ e.target['comment'].value    // envoi du nouveau commentaire
     }
 
     const config = {     
@@ -68,7 +68,7 @@ export default function CardPost(props) {
 
     axios.put(`http://localhost:4000/api/posts/${props.post.pt._id}`, requete, config)    // envoi au serveur Backend
       .then(function(value) {
-        props.post.pt.comments.push(e.target['comment'].value);
+        props.post.pt.comments.push(pseudo +'/§/'+ e.target['comment'].value);
         console.log(value.data.message);
         setOncomment(false);
       })
@@ -191,7 +191,7 @@ export default function CardPost(props) {
             <textarea name="comment" rows="3" defaultValue={''} minlength="6" maxLength="120" required/>
             <button type="submit">Poster</button>
           </form>}
-          {props.post.pt.comments.map(pt =>(<p key={pt}><p className='pseudo'>{pseudo}</p>{pt}</p>))}
+          {props.post.pt.comments.map(pt =>(<p key={pt}><p className='pseudo'>{pt.substr(0,pt.indexOf("/§/"))}</p>{pt.substr(pt.indexOf("/§/")+3)}</p>))}
         </div>
       </div>
       {(props.delPost  && ((props.userId===props.post.pt.userId) || admin)) && <button className='button--supp' onClick={() => deletePost()}>X</button>}
