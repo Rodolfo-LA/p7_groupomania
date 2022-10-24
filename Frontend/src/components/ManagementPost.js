@@ -72,7 +72,7 @@ export default function ManagementPost() {
   return (
     <React.StrictMode>
       <div className='ground'>
-        <h1>Connecté -- {admin ? 'ADMINISTRATEUR':pseudo} --</h1>
+        <h1>Connecté -- {admin ? pseudo + ' - Admin':pseudo} --</h1>
             <div className="options">
               <button onClick={() => setCreate(!onCreate)}>Créer</button>
               {onButtonModify ? <button onClick={() => Modify()}>Modifier</button>:<button className='button--off'>Modifier</button>}
