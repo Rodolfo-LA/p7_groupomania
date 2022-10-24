@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose'); // Utilisation du module mongoose
 
-// Définition du modèle de données pour la base mongoDB des sauces
+// Définition du modèle de données pour la base mongoDB des Posts
 
 const postSchema = mongoose.Schema({
   userId: { type: String, required: true },
