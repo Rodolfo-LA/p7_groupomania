@@ -14,4 +14,4 @@ const postSchema = mongoose.Schema({
   usersDisliked: { type: [String], required: true },
 });
 
-module.exports = mongoose.model('Post', postSchema);   // Exportation du modèle sauce
+module.exports = mongoose.model('Post', postSchema);   // Exportation du modèle post
