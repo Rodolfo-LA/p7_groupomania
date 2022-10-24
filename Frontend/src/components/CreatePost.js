@@ -5,6 +5,7 @@ import { context } from './ManagementPost'
 export default function CreatePost(props) {
 
   const tokenPass = useContext(context).token;   // récupération du token de l'utilisateur courant
+  const pseudo = useContext(context).pseudo;
 
   const [choixFichier, setChoixFichier] = useState();
   const [onSelectImg, setonSelectImg] = useState(false);
@@ -29,7 +30,7 @@ export default function CreatePost(props) {
       let formD = new FormData();
 
       formD.append('image',choixFichier );
-      formD.append('name',e.target['titre'].value);
+      formD.append('name','@' + pseudo +' - '+ e.target['titre'].value + ' -');
 
       const config = {     
         headers: { 'Authorization': `Bearer ${tokenPass}`,
