@@ -341,7 +341,7 @@ figure {
   display: flex;
   flex-direction: column;
   align-items: center;
-  & p {
+  & div {
     display: flex;
     align-items: baseline;
     gap: 3%;
@@ -355,12 +355,15 @@ figure {
     padding: 9px 30px 9px 9px;
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
   }
-  & p .pseudo {
+  & div .pseudo {
     font-size: 100%;
+    font-family: Lato;
     width: 20%;
     color: $priColor;
     margin: 0px;
     padding-right: 0px;
+    border-radius: 6px;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
 }
   & form {
     margin-top: 0px;
