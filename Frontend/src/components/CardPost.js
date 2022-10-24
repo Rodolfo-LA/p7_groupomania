@@ -188,7 +188,7 @@ export default function CardPost(props) {
         <div className='cadre-comment'>
           {onComment && 
           <form onSubmit={sendInfos}>
-            <textarea name="comment" rows="3" defaultValue={''} minlength="6" maxLength="120" required/>
+            <textarea name="comment" rows="3" defaultValue={''} minLength={3} maxLength={120} required/>
             <button type="submit">Poster</button>
           </form>}
           {props.post.pt.comments.map(pt =>(<div key={pt}><p className='pseudo'>{pt.substr(0,pt.indexOf("/§/"))}</p>{pt.substr(pt.indexOf("/§/")+3)}</div>))}
